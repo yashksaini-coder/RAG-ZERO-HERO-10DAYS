@@ -1,0 +1,5 @@
+Document: chunk_fixed
+
+Fixed-size chunking creates predictable chunk lengths but can split sentences.
+
+This document is a small synthetic fixture for RAG retrieval experiments.

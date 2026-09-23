@@ -1,0 +1,5 @@
+Document: chunk_sentence
+
+Sentence-aware chunking tries to preserve complete sentences inside chunks.
+
+This document is a small synthetic fixture for RAG retrieval experiments.

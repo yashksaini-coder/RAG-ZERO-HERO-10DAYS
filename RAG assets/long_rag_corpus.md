@@ -1,0 +1,207 @@
+## Section 1: Python
+
+Python is a general-purpose programming language known for readable syntax and a large ecosystem. It is commonly used for web development, automation, data analysis, machine learning, scripting, and backend services. ## Section 1: Python
+
+Python is a general-purpose programming language known for readable syntax and a large ecosystem. It is commonly used for web development, automation, data analysis, machine learning, scripting, and backend services. ## Section 1: Python
+
+Python is a general-purpose programming language known for readable syntax and a large ecosystem. It is commonly used for web development, automation, data analysis, machine learning, scripting, and backend services. 
+
+## Section 2: Machine Learning
+
+Machine learning systems learn patterns from data and use those patterns to make predictions or decisions. Supervised learning uses labeled examples, while unsupervised learning looks for structure in unlabeled data. ## Section 2: Machine Learning
+
+Machine learning systems learn patterns from data and use those patterns to make predictions or decisions. Supervised learning uses labeled examples, while unsupervised learning looks for structure in unlabeled data. ## Section 2: Machine Learning
+
+Machine learning systems learn patterns from data and use those patterns to make predictions or decisions. Supervised learning uses labeled examples, while unsupervised learning looks for structure in unlabeled data. 
+
+## Section 3: RAG
+
+Retrieval-Augmented Generation combines information retrieval with language generation. A typical system retrieves relevant chunks from a document collection and places those chunks into the context supplied to a language model. ## Section 3: RAG
+
+Retrieval-Augmented Generation combines information retrieval with language generation. A typical system retrieves relevant chunks from a document collection and places those chunks into the context supplied to a language model. ## Section 3: RAG
+
+Retrieval-Augmented Generation combines information retrieval with language generation. A typical system retrieves relevant chunks from a document collection and places those chunks into the context supplied to a language model. 
+
+## Section 4: Embeddings
+
+An embedding represents an item such as text as a numerical vector. Similar meanings tend to produce vectors that are close according to a chosen distance or similarity function. ## Section 4: Embeddings
+
+An embedding represents an item such as text as a numerical vector. Similar meanings tend to produce vectors that are close according to a chosen distance or similarity function. ## Section 4: Embeddings
+
+An embedding represents an item such as text as a numerical vector. Similar meanings tend to produce vectors that are close according to a chosen distance or similarity function. 
+
+## Section 5: Vector Databases
+
+A vector database stores vectors and supports similarity search. Metadata filters can be used alongside vector similarity to narrow results by source, category, date, or other attributes. ## Section 5: Vector Databases
+
+A vector database stores vectors and supports similarity search. Metadata filters can be used alongside vector similarity to narrow results by source, category, date, or other attributes. ## Section 5: Vector Databases
+
+A vector database stores vectors and supports similarity search. Metadata filters can be used alongside vector similarity to narrow results by source, category, date, or other attributes. 
+
+## Section 6: Chunking
+
+Chunking divides source documents into smaller pieces before indexing. Chunk size and overlap affect retrieval quality, context size, latency, and the amount of redundant information returned. ## Section 6: Chunking
+
+Chunking divides source documents into smaller pieces before indexing. Chunk size and overlap affect retrieval quality, context size, latency, and the amount of redundant information returned. ## Section 6: Chunking
+
+Chunking divides source documents into smaller pieces before indexing. Chunk size and overlap affect retrieval quality, context size, latency, and the amount of redundant information returned. 
+
+## Section 7: Evaluation
+
+RAG evaluation can measure retrieval relevance, answer correctness, citation quality, latency, and failure cases. A small fixed question-and-answer dataset is useful for repeatable experiments. ## Section 7: Evaluation
+
+RAG evaluation can measure retrieval relevance, answer correctness, citation quality, latency, and failure cases. A small fixed question-and-answer dataset is useful for repeatable experiments. ## Section 7: Evaluation
+
+RAG evaluation can measure retrieval relevance, answer correctness, citation quality, latency, and failure cases. A small fixed question-and-answer dataset is useful for repeatable experiments. 
+
+## Section 8: APIs
+
+A backend API exposes operations through endpoints. FastAPI can define typed request and response models, accept uploaded files, and generate interactive API documentation. ## Section 8: APIs
+
+A backend API exposes operations through endpoints. FastAPI can define typed request and response models, accept uploaded files, and generate interactive API documentation. ## Section 8: APIs
+
+A backend API exposes operations through endpoints. FastAPI can define typed request and response models, accept uploaded files, and generate interactive API documentation. 
+
+## Section 9: Streaming UI
+
+A Streamlit interface can provide document upload, question input, answer rendering, source inspection, and basic statistics without requiring a separate frontend framework. ## Section 9: Streaming UI
+
+A Streamlit interface can provide document upload, question input, answer rendering, source inspection, and basic statistics without requiring a separate frontend framework. ## Section 9: Streaming UI
+
+A Streamlit interface can provide document upload, question input, answer rendering, source inspection, and basic statistics without requiring a separate frontend framework. 
+
+## Section 10: Production
+
+Production RAG systems need observability, configuration, error handling, access controls, persistence, retries, and careful treatment of secrets and user-provided documents. ## Section 10: Production
+
+Production RAG systems need observability, configuration, error handling, access controls, persistence, retries, and careful treatment of secrets and user-provided documents. ## Section 10: Production
+
+Production RAG systems need observability, configuration, error handling, access controls, persistence, retries, and careful treatment of secrets and user-provided documents. 
+
+## Section 11: Python
+
+Python is a general-purpose programming language known for readable syntax and a large ecosystem. It is commonly used for web development, automation, data analysis, machine learning, scripting, and backend services. ## Section 11: Python
+
+Python is a general-purpose programming language known for readable syntax and a large ecosystem. It is commonly used for web development, automation, data analysis, machine learning, scripting, and backend services. ## Section 11: Python
+
+Python is a general-purpose programming language known for readable syntax and a large ecosystem. It is commonly used for web development, automation, data analysis, machine learning, scripting, and backend services. 
+
+## Section 12: Machine Learning
+
+Machine learning systems learn patterns from data and use those patterns to make predictions or decisions. Supervised learning uses labeled examples, while unsupervised learning looks for structure in unlabeled data. ## Section 12: Machine Learning
+
+Machine learning systems learn patterns from data and use those patterns to make predictions or decisions. Supervised learning uses labeled examples, while unsupervised learning looks for structure in unlabeled data. ## Section 12: Machine Learning
+
+Machine learning systems learn patterns from data and use those patterns to make predictions or decisions. Supervised learning uses labeled examples, while unsupervised learning looks for structure in unlabeled data. 
+
+## Section 13: RAG
+
+Retrieval-Augmented Generation combines information retrieval with language generation. A typical system retrieves relevant chunks from a document collection and places those chunks into the context supplied to a language model. ## Section 13: RAG
+
+Retrieval-Augmented Generation combines information retrieval with language generation. A typical system retrieves relevant chunks from a document collection and places those chunks into the context supplied to a language model. ## Section 13: RAG
+
+Retrieval-Augmented Generation combines information retrieval with language generation. A typical system retrieves relevant chunks from a document collection and places those chunks into the context supplied to a language model. 
+
+## Section 14: Embeddings
+
+An embedding represents an item such as text as a numerical vector. Similar meanings tend to produce vectors that are close according to a chosen distance or similarity function. ## Section 14: Embeddings
+
+An embedding represents an item such as text as a numerical vector. Similar meanings tend to produce vectors that are close according to a chosen distance or similarity function. ## Section 14: Embeddings
+
+An embedding represents an item such as text as a numerical vector. Similar meanings tend to produce vectors that are close according to a chosen distance or similarity function. 
+
+## Section 15: Vector Databases
+
+A vector database stores vectors and supports similarity search. Metadata filters can be used alongside vector similarity to narrow results by source, category, date, or other attributes. ## Section 15: Vector Databases
+
+A vector database stores vectors and supports similarity search. Metadata filters can be used alongside vector similarity to narrow results by source, category, date, or other attributes. ## Section 15: Vector Databases
+
+A vector database stores vectors and supports similarity search. Metadata filters can be used alongside vector similarity to narrow results by source, category, date, or other attributes. 
+
+## Section 16: Chunking
+
+Chunking divides source documents into smaller pieces before indexing. Chunk size and overlap affect retrieval quality, context size, latency, and the amount of redundant information returned. ## Section 16: Chunking
+
+Chunking divides source documents into smaller pieces before indexing. Chunk size and overlap affect retrieval quality, context size, latency, and the amount of redundant information returned. ## Section 16: Chunking
+
+Chunking divides source documents into smaller pieces before indexing. Chunk size and overlap affect retrieval quality, context size, latency, and the amount of redundant information returned. 
+
+## Section 17: Evaluation
+
+RAG evaluation can measure retrieval relevance, answer correctness, citation quality, latency, and failure cases. A small fixed question-and-answer dataset is useful for repeatable experiments. ## Section 17: Evaluation
+
+RAG evaluation can measure retrieval relevance, answer correctness, citation quality, latency, and failure cases. A small fixed question-and-answer dataset is useful for repeatable experiments. ## Section 17: Evaluation
+
+RAG evaluation can measure retrieval relevance, answer correctness, citation quality, latency, and failure cases. A small fixed question-and-answer dataset is useful for repeatable experiments. 
+
+## Section 18: APIs
+
+A backend API exposes operations through endpoints. FastAPI can define typed request and response models, accept uploaded files, and generate interactive API documentation. ## Section 18: APIs
+
+A backend API exposes operations through endpoints. FastAPI can define typed request and response models, accept uploaded files, and generate interactive API documentation. ## Section 18: APIs
+
+A backend API exposes operations through endpoints. FastAPI can define typed request and response models, accept uploaded files, and generate interactive API documentation. 
+
+## Section 19: Streaming UI
+
+A Streamlit interface can provide document upload, question input, answer rendering, source inspection, and basic statistics without requiring a separate frontend framework. ## Section 19: Streaming UI
+
+A Streamlit interface can provide document upload, question input, answer rendering, source inspection, and basic statistics without requiring a separate frontend framework. ## Section 19: Streaming UI
+
+A Streamlit interface can provide document upload, question input, answer rendering, source inspection, and basic statistics without requiring a separate frontend framework. 
+
+## Section 20: Production
+
+Production RAG systems need observability, configuration, error handling, access controls, persistence, retries, and careful treatment of secrets and user-provided documents. ## Section 20: Production
+
+Production RAG systems need observability, configuration, error handling, access controls, persistence, retries, and careful treatment of secrets and user-provided documents. ## Section 20: Production
+
+Production RAG systems need observability, configuration, error handling, access controls, persistence, retries, and careful treatment of secrets and user-provided documents. 
+
+## Section 21: Python
+
+Python is a general-purpose programming language known for readable syntax and a large ecosystem. It is commonly used for web development, automation, data analysis, machine learning, scripting, and backend services. ## Section 21: Python
+
+Python is a general-purpose programming language known for readable syntax and a large ecosystem. It is commonly used for web development, automation, data analysis, machine learning, scripting, and backend services. ## Section 21: Python
+
+Python is a general-purpose programming language known for readable syntax and a large ecosystem. It is commonly used for web development, automation, data analysis, machine learning, scripting, and backend services. 
+
+## Section 22: Machine Learning
+
+Machine learning systems learn patterns from data and use those patterns to make predictions or decisions. Supervised learning uses labeled examples, while unsupervised learning looks for structure in unlabeled data. ## Section 22: Machine Learning
+
+Machine learning systems learn patterns from data and use those patterns to make predictions or decisions. Supervised learning uses labeled examples, while unsupervised learning looks for structure in unlabeled data. ## Section 22: Machine Learning
+
+Machine learning systems learn patterns from data and use those patterns to make predictions or decisions. Supervised learning uses labeled examples, while unsupervised learning looks for structure in unlabeled data. 
+
+## Section 23: RAG
+
+Retrieval-Augmented Generation combines information retrieval with language generation. A typical system retrieves relevant chunks from a document collection and places those chunks into the context supplied to a language model. ## Section 23: RAG
+
+Retrieval-Augmented Generation combines information retrieval with language generation. A typical system retrieves relevant chunks from a document collection and places those chunks into the context supplied to a language model. ## Section 23: RAG
+
+Retrieval-Augmented Generation combines information retrieval with language generation. A typical system retrieves relevant chunks from a document collection and places those chunks into the context supplied to a language model. 
+
+## Section 24: Embeddings
+
+An embedding represents an item such as text as a numerical vector. Similar meanings tend to produce vectors that are close according to a chosen distance or similarity function. ## Section 24: Embeddings
+
+An embedding represents an item such as text as a numerical vector. Similar meanings tend to produce vectors that are close according to a chosen distance or similarity function. ## Section 24: Embeddings
+
+An embedding represents an item such as text as a numerical vector. Similar meanings tend to produce vectors that are close according to a chosen distance or similarity function. 
+
+## Section 25: Vector Databases
+
+A vector database stores vectors and supports similarity search. Metadata filters can be used alongside vector similarity to narrow results by source, category, date, or other attributes. ## Section 25: Vector Databases
+
+A vector database stores vectors and supports similarity search. Metadata filters can be used alongside vector similarity to narrow results by source, category, date, or other attributes. ## Section 25: Vector Databases
+
+A vector database stores vectors and supports similarity search. Metadata filters can be used alongside vector similarity to narrow results by source, category, date, or other attributes. 
+
+## Section 26: Chunking
+
+Chunking divides source documents into smaller pieces before indexing. Chunk size and overlap affect retrieval quality, context size, latency, and the amount of redundant information returned. ## Section 26: Chunking
+
+Chunking divides source documents into smaller pieces before indexing. Chunk size and overlap affect retrieval quality, context size, latency, and the amount of redundant information returned. ## Section 26: Chunking
+
+Chunking divides source documents into smaller pieces before indexing. Chunk size and overlap affect retrieval quality, context size, latency, and the amount of redundant information returned. 

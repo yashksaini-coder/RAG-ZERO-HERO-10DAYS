@@ -1,0 +1,5 @@
+Document: ml_unsupervised
+
+Unsupervised learning finds structure in data without explicit target labels.
+
+This document is a small synthetic fixture for RAG retrieval experiments.

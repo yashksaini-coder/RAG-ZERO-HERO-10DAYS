@@ -1,0 +1,5 @@
+Document: chunk_paragraph
+
+Paragraph-aware chunking keeps related prose together but may produce uneven sizes.
+
+This document is a small synthetic fixture for RAG retrieval experiments.

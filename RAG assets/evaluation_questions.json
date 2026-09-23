@@ -1,0 +1,76 @@
+[
+  {
+    "question": "What does RAG combine?",
+    "answer": "retrieval and language generation",
+    "keywords": [
+      "retrieval",
+      "generation"
+    ],
+    "source": "rag_intro"
+  },
+  {
+    "question": "What is an embedding?",
+    "answer": "a numerical vector representation",
+    "keywords": [
+      "vector",
+      "representation"
+    ],
+    "source": "ml_embeddings"
+  },
+  {
+    "question": "What does BM25 provide?",
+    "answer": "lexical document ranking",
+    "keywords": [
+      "BM25",
+      "lexical",
+      "ranking"
+    ],
+    "source": "bm25"
+  },
+  {
+    "question": "Why store metadata in RAG?",
+    "answer": "to make results traceable and filterable",
+    "keywords": [
+      "metadata",
+      "traceable",
+      "filter"
+    ],
+    "source": "metadata"
+  },
+  {
+    "question": "What is sentence-aware chunking?",
+    "answer": "chunking that tries to preserve complete sentences",
+    "keywords": [
+      "sentence",
+      "chunking"
+    ],
+    "source": "chunk_sentence"
+  },
+  {
+    "question": "What does FastAPI provide?",
+    "answer": "typed HTTP endpoints and OpenAPI documentation",
+    "keywords": [
+      "HTTP",
+      "OpenAPI"
+    ],
+    "source": "fastapi"
+  },
+  {
+    "question": "What is hybrid retrieval?",
+    "answer": "a combination of lexical and semantic retrieval",
+    "keywords": [
+      "lexical",
+      "semantic"
+    ],
+    "source": "hybrid"
+  },
+  {
+    "question": "Why use a fixed evaluation set?",
+    "answer": "to make experiments repeatable",
+    "keywords": [
+      "evaluation",
+      "repeatable"
+    ],
+    "source": "evaluation"
+  }
+]

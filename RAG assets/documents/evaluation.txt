@@ -1,0 +1,5 @@
+Document: evaluation
+
+RAG evaluation should test retrieval relevance and answer correctness on a fixed dataset.
+
+This document is a small synthetic fixture for RAG retrieval experiments.

@@ -1,0 +1,10 @@
+How does retrieval augmented generation work?
+How can I find documents by meaning rather than exact words?
+What is the difference between lexical and semantic search?
+How should I split documents before embedding them?
+How can I improve the ranking of retrieved results?
+What metadata should I store with chunks?
+How can I expose a RAG system through an API?
+How can I build a simple interface for a Python RAG app?
+How should I evaluate whether a RAG answer is correct?
+How should API keys be handled in a deployed application?

@@ -1,0 +1,5 @@
+Document: ml_supervised
+
+Supervised machine learning learns from labeled examples such as input-output pairs.
+
+This document is a small synthetic fixture for RAG retrieval experiments.

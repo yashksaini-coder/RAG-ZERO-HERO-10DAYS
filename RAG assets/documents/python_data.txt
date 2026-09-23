@@ -1,0 +1,5 @@
+Document: python_data
+
+Python is widely used for data analysis because of libraries for arrays, tables, and visualization.
+
+This document is a small synthetic fixture for RAG retrieval experiments.

@@ -1,0 +1,170 @@
+[
+  {
+    "id": "doc-001",
+    "source": "documents/python.txt",
+    "page": 2,
+    "section": "python",
+    "text": "Python uses indentation to define blocks and has a large standard library."
+  },
+  {
+    "id": "doc-002",
+    "source": "documents/python_web.txt",
+    "page": 3,
+    "section": "python",
+    "text": "Python web applications commonly use frameworks such as FastAPI and Django."
+  },
+  {
+    "id": "doc-003",
+    "source": "documents/python_data.txt",
+    "page": 4,
+    "section": "python",
+    "text": "Python is widely used for data analysis because of libraries for arrays, tables, and visualization."
+  },
+  {
+    "id": "doc-004",
+    "source": "documents/ml_supervised.txt",
+    "page": 5,
+    "section": "ml",
+    "text": "Supervised machine learning learns from labeled examples such as input-output pairs."
+  },
+  {
+    "id": "doc-005",
+    "source": "documents/ml_unsupervised.txt",
+    "page": 1,
+    "section": "ml",
+    "text": "Unsupervised learning finds structure in data without explicit target labels."
+  },
+  {
+    "id": "doc-006",
+    "source": "documents/ml_embeddings.txt",
+    "page": 2,
+    "section": "ml",
+    "text": "Embedding models transform text into vectors that can be compared for semantic similarity."
+  },
+  {
+    "id": "doc-007",
+    "source": "documents/rag_intro.txt",
+    "page": 3,
+    "section": "rag",
+    "text": "RAG retrieves relevant documents and gives them to a language model as context."
+  },
+  {
+    "id": "doc-008",
+    "source": "documents/rag_citations.txt",
+    "page": 4,
+    "section": "rag",
+    "text": "A citation-aware RAG system stores source metadata alongside each chunk."
+  },
+  {
+    "id": "doc-009",
+    "source": "documents/rag_query.txt",
+    "page": 5,
+    "section": "rag",
+    "text": "Query rewriting generates alternate formulations to improve retrieval coverage."
+  },
+  {
+    "id": "doc-010",
+    "source": "documents/rag_rerank.txt",
+    "page": 1,
+    "section": "rag",
+    "text": "Reranking scores an initial candidate set with a more precise relevance model."
+  },
+  {
+    "id": "doc-011",
+    "source": "documents/chunk_fixed.txt",
+    "page": 2,
+    "section": "chunk",
+    "text": "Fixed-size chunking creates predictable chunk lengths but can split sentences."
+  },
+  {
+    "id": "doc-012",
+    "source": "documents/chunk_sentence.txt",
+    "page": 3,
+    "section": "chunk",
+    "text": "Sentence-aware chunking tries to preserve complete sentences inside chunks."
+  },
+  {
+    "id": "doc-013",
+    "source": "documents/chunk_paragraph.txt",
+    "page": 4,
+    "section": "chunk",
+    "text": "Paragraph-aware chunking keeps related prose together but may produce uneven sizes."
+  },
+  {
+    "id": "doc-014",
+    "source": "documents/vector_db.txt",
+    "page": 5,
+    "section": "vector",
+    "text": "Vector databases store numerical representations and support nearest-neighbor search."
+  },
+  {
+    "id": "doc-015",
+    "source": "documents/chromadb.txt",
+    "page": 1,
+    "section": "chromadb",
+    "text": "Chroma can store documents, embeddings, identifiers, and metadata for similarity search."
+  },
+  {
+    "id": "doc-016",
+    "source": "documents/bm25.txt",
+    "page": 2,
+    "section": "bm25",
+    "text": "BM25 is a lexical ranking method that scores documents according to term relevance."
+  },
+  {
+    "id": "doc-017",
+    "source": "documents/hybrid.txt",
+    "page": 3,
+    "section": "hybrid",
+    "text": "Hybrid retrieval combines lexical and semantic retrieval signals."
+  },
+  {
+    "id": "doc-018",
+    "source": "documents/fastapi.txt",
+    "page": 4,
+    "section": "fastapi",
+    "text": "FastAPI provides typed HTTP endpoints and automatic OpenAPI documentation."
+  },
+  {
+    "id": "doc-019",
+    "source": "documents/streamlit.txt",
+    "page": 5,
+    "section": "streamlit",
+    "text": "Streamlit can build a simple interactive interface around a Python application."
+  },
+  {
+    "id": "doc-020",
+    "source": "documents/evaluation.txt",
+    "page": 1,
+    "section": "evaluation",
+    "text": "RAG evaluation should test retrieval relevance and answer correctness on a fixed dataset."
+  },
+  {
+    "id": "doc-021",
+    "source": "documents/deployment.txt",
+    "page": 2,
+    "section": "deployment",
+    "text": "A deployed RAG service needs configuration, logging, retries, health checks, and secret management."
+  },
+  {
+    "id": "doc-022",
+    "source": "documents/security.txt",
+    "page": 3,
+    "section": "security",
+    "text": "API keys should be stored in environment variables or a secret manager rather than source files."
+  },
+  {
+    "id": "doc-023",
+    "source": "documents/observability.txt",
+    "page": 4,
+    "section": "observability",
+    "text": "Latency, retrieval scores, token usage, and errors are useful signals for debugging RAG systems."
+  },
+  {
+    "id": "doc-024",
+    "source": "documents/metadata.txt",
+    "page": 5,
+    "section": "metadata",
+    "text": "Metadata such as source, page, section, and chunk index makes retrieval results traceable."
+  }
+]

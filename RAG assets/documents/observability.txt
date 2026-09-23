@@ -1,0 +1,5 @@
+Document: observability
+
+Latency, retrieval scores, token usage, and errors are useful signals for debugging RAG systems.
+
+This document is a small synthetic fixture for RAG retrieval experiments.

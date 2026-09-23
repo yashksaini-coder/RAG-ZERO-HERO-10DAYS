@@ -1,0 +1,5 @@
+Document: rag_citations
+
+A citation-aware RAG system stores source metadata alongside each chunk.
+
+This document is a small synthetic fixture for RAG retrieval experiments.

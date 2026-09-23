@@ -1,0 +1,6 @@
+  RAG   uses   retrieval.
+
+
+This    line has   extra spaces.
+Visit https://example.com/test or email practice@example.com.
+Quotes: “hello” — dash test.

@@ -1,0 +1,5 @@
+Document: rag_rerank
+
+Reranking scores an initial candidate set with a more precise relevance model.
+
+This document is a small synthetic fixture for RAG retrieval experiments.

@@ -1,0 +1,5 @@
+Document: rag_intro
+
+RAG retrieves relevant documents and gives them to a language model as context.
+
+This document is a small synthetic fixture for RAG retrieval experiments.

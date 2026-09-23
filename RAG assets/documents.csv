@@ -1,0 +1,25 @@
+id,topic,title,text
+doc-001,python,Python,Python uses indentation to define blocks and has a large standard library.
+doc-002,python,Python Web,Python web applications commonly use frameworks such as FastAPI and Django.
+doc-003,python,Python Data,"Python is widely used for data analysis because of libraries for arrays, tables, and visualization."
+doc-004,ml,Ml Supervised,Supervised machine learning learns from labeled examples such as input-output pairs.
+doc-005,ml,Ml Unsupervised,Unsupervised learning finds structure in data without explicit target labels.
+doc-006,ml,Ml Embeddings,Embedding models transform text into vectors that can be compared for semantic similarity.
+doc-007,rag,Rag Intro,RAG retrieves relevant documents and gives them to a language model as context.
+doc-008,rag,Rag Citations,A citation-aware RAG system stores source metadata alongside each chunk.
+doc-009,rag,Rag Query,Query rewriting generates alternate formulations to improve retrieval coverage.
+doc-010,rag,Rag Rerank,Reranking scores an initial candidate set with a more precise relevance model.
+doc-011,chunk,Chunk Fixed,Fixed-size chunking creates predictable chunk lengths but can split sentences.
+doc-012,chunk,Chunk Sentence,Sentence-aware chunking tries to preserve complete sentences inside chunks.
+doc-013,chunk,Chunk Paragraph,Paragraph-aware chunking keeps related prose together but may produce uneven sizes.
+doc-014,vector,Vector Db,Vector databases store numerical representations and support nearest-neighbor search.
+doc-015,chromadb,Chromadb,"Chroma can store documents, embeddings, identifiers, and metadata for similarity search."
+doc-016,bm25,Bm25,BM25 is a lexical ranking method that scores documents according to term relevance.
+doc-017,hybrid,Hybrid,Hybrid retrieval combines lexical and semantic retrieval signals.
+doc-018,fastapi,Fastapi,FastAPI provides typed HTTP endpoints and automatic OpenAPI documentation.
+doc-019,streamlit,Streamlit,Streamlit can build a simple interactive interface around a Python application.
+doc-020,evaluation,Evaluation,RAG evaluation should test retrieval relevance and answer correctness on a fixed dataset.
+doc-021,deployment,Deployment,"A deployed RAG service needs configuration, logging, retries, health checks, and secret management."
+doc-022,security,Security,API keys should be stored in environment variables or a secret manager rather than source files.
+doc-023,observability,Observability,"Latency, retrieval scores, token usage, and errors are useful signals for debugging RAG systems."
+doc-024,metadata,Metadata,"Metadata such as source, page, section, and chunk index makes retrieval results traceable."
