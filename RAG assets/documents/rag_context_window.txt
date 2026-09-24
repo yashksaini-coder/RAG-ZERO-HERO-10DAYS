@@ -1,0 +1,12 @@
+Managing the Context Budget
+
+Everything sent to the model competes for one bounded budget: the system instruction, the
+conversation so far, the retrieved passages, and the space reserved for the answer itself.
+
+Reserving the output allowance first and dividing what remains among passages prevents the
+common failure where a long set of passages leaves no room to reply and the response is cut
+off mid-sentence.
+
+When candidates exceed the budget, dropping whole low-ranked passages is better than
+truncating every passage a little. A passage cut in half may lose the sentence that made it
+relevant while still consuming its share of the budget.

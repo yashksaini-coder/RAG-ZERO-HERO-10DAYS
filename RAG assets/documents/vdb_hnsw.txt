@@ -1,0 +1,13 @@
+Approximate Nearest Neighbour Indexes
+
+A navigable small-world index arranges items in layers of linked neighbours. A search
+enters at a sparse top layer, moves greedily toward the query, then drops into a denser
+layer and repeats, so only a small fraction of the collection is ever examined.
+
+Two parameters govern the trade-off. The number of links per item raises both memory use
+and accuracy, while the size of the candidate list explored at query time trades latency
+for recall. Raising either improves results until the curve flattens.
+
+The index is approximate by construction, so a true nearest neighbour is occasionally
+missed. Applications that must not miss one either run an exact comparison over a filtered
+subset or over-fetch candidates and rescore them precisely.

@@ -1,0 +1,13 @@
+BM25 Lexical Ranking
+
+BM25 scores a document against a query by summing a contribution for each query term the
+document contains. Terms that appear in few documents contribute more, because a rare word
+discriminates better than a common one.
+
+Repetition helps with diminishing returns: the second occurrence of a term adds less than
+the first, and the curve saturates rather than growing without bound. A length correction
+stops long documents from scoring highly merely by containing more words.
+
+The method matches surface forms and has no notion of meaning, so it is excellent on exact
+identifiers, product codes, and rare proper nouns, and blind to a question phrased entirely
+in synonyms of the document's vocabulary.

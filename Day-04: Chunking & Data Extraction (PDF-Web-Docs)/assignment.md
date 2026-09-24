@@ -36,7 +36,7 @@ Create a comprehensive PDF extractor `pdf_extractor.py` that:
 - Add progress indication for large PDFs
 - Support batch processing (multiple PDFs)
 
-**Test with:** A multi-page PDF document
+**Test with:** `../RAG assets/sample_rag_manual.pdf` — 10 pages, ~2,170 words, with `/Title` and `/Author` set so requirement 2 (metadata) has something to return. For the error paths in requirement 3, also try `../RAG assets/empty.txt` and a file that is not a PDF at all.
 
 **Deliverable:** `task1_pdf_extractor.py`
 
@@ -59,10 +59,14 @@ Build a web scraper `web_scraper.py` that:
 - Support both single pages and article-style pages
 - Clean extracted text (remove extra whitespace, normalize)
 
-**Test with:** 
-- A news article URL
-- A blog post URL
-- A Wikipedia page
+**Test with:** start local and deterministic, then go to the network.
+
+- `../RAG assets/sample_article.html` — has `<nav>`, an ad div, an `<aside>`,
+  a `<footer>` and a `<script>` that must all be stripped, and `<meta name="author">`,
+  `article:published_time` and a `<time>` byline for the metadata in requirement 5.
+  Only the text inside `<article>` should survive.
+- `../RAG assets/malformed.html` — unclosed tags and a stray entity, for requirement 4.
+- Then a real news article URL, a blog post URL and a Wikipedia page.
 
 **Deliverable:** `task2_web_scraper.py`
 
@@ -84,7 +88,15 @@ Implement three different chunking strategies and compare them:
   - Shows sample chunks from each strategy
 - Visualize differences (print sample chunks side-by-side)
 
-**Test with:** A long text document (at least 2000 words)
+**Test with:** `../RAG assets/long_rag_corpus.md` (~6,800 words, deliberately varied paragraph lengths). The variance is what makes the three strategies differ; at `chunk_size=500, overlap=75` you should get roughly:
+
+| strategy | chunks | avg size | stdev |
+| --- | --- | --- | --- |
+| fixed | 108 | 499 | 12 |
+| sentence | 107 | 426 | 48 |
+| paragraph | 117 | 390 | 92 |
+
+If your three strategies produce near-identical variance, the bug is in your splitter rather than in the fixture.
 
 **Deliverable:** `task3_chunking_comparison.py`
 
@@ -102,6 +114,23 @@ Create a comprehensive text cleaning module `text_cleaner.py`:
 5. Fix encoding issues
 6. Remove URLs/email addresses (optional)
 7. Normalize quotes and dashes
+
+**Test with:** `../RAG assets/messy_text.txt`. It contains a trigger for every step
+above, so each one is verifiable independently:
+
+| Step | What is in the file |
+| --- | --- |
+| 1. extra whitespace | runs of spaces, trailing spaces, tabs |
+| 2. line breaks | CRLF endings and runs of blank lines |
+| 3. special characters | control characters, bullet glyphs, non-breaking spaces |
+| 4. headers/footers | a repeated `RAG Practice Manual ... Page N of 12` header and a copyright footer |
+| 5. encoding issues | mojibake from a double decode (`itâ€™s`) |
+| 6. URLs/emails | a URL with a query string and an email address |
+| 7. quotes and dashes | smart quotes, em dash, en dash, ellipsis |
+
+It also contains words hyphenated across a line break (`re-\r\ntrieval`), which
+must be rejoined before chunking. Read it as **bytes** if you want to see the CRLF
+and the mojibake intact.
 
 **Requirements:**
 - Make each cleaning step optional/configurable
@@ -208,7 +237,7 @@ Create a complete application `document_processor.py` that processes documents a
 **Example Usage:**
 ```bash
 # Command line
-python document_processor.py input.pdf --chunk-size 500 --overlap 50 --output json
+python document_processor.py "../RAG assets/sample_rag_manual.pdf" --chunk-size 500 --overlap 50 --output json
 
 # Interactive mode
 python document_processor.py
@@ -216,11 +245,11 @@ python document_processor.py
 
 **Example Output:**
 ```
-Processing: document.pdf
-✓ Extracted 15 pages
+Processing: ../RAG assets/sample_rag_manual.pdf
+✓ Extracted 10 pages
 ✓ Cleaned text (removed 234 extra spaces)
-✓ Created 42 chunks
-✓ Average chunk size: 487 words
+✓ Created 30 chunks
+✓ Average chunk size: 72 words
 ✓ Processing time: 2.3 seconds
 
 Chunks saved to: output/document_chunks.json
@@ -248,7 +277,7 @@ Statistics saved to: output/document_stats.txt
 
 ### Task 1 Expected Output:
 ```python
-result = extract_pdf("document.pdf")
+result = extract_pdf("../RAG assets/sample_rag_manual.pdf")
 # Output:
 {
     "full_text": "Complete text...",
@@ -305,12 +334,12 @@ Paragraph-Aware Chunking:
 
 ### Task 5 Expected Output:
 ```python
-chunks = chunk_with_metadata(text, source="doc.pdf")
+chunks = chunk_with_metadata(text, source="../RAG assets/sample_rag_manual.pdf")
 # Output: List of Chunk objects
 [
     Chunk(
         chunk_id=1,
-        source="doc.pdf",
+        source="../RAG assets/sample_rag_manual.pdf",
         page_number=1,
         start_char=0,
         end_char=500,
@@ -335,20 +364,20 @@ The document processor should provide:
 === Document Processor ===
 Choose option: 1
 
-Enter file path: document.pdf
+Enter file path: ../RAG assets/sample_rag_manual.pdf
 Chunk size [500]: 400
 Overlap [50]: 40
 Strategy [fixed/sentence/paragraph]: sentence
 
 [Processing...]
-✓ Extracted 15 pages
-✓ Created 38 chunks
+✓ Extracted 10 pages
+✓ Created 40 chunks
 ✓ Saved to output/document_chunks.json
 
 Statistics:
-- Total words: 15,234
-- Chunks: 38
-- Avg chunk size: 401 words
+- Total words: 2,169
+- Chunks: 40
+- Avg chunk size: 54 words
 - Processing time: 2.1s
 
 [1] View chunks

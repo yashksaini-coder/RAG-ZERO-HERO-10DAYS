@@ -1,5 +1,13 @@
-Document: chunk_sentence
+Sentence-Aware Chunking
 
-Sentence-aware chunking tries to preserve complete sentences inside chunks.
+Sentence-aware chunking first segments the text into sentences, then accumulates whole
+sentences into a piece until adding the next one would exceed the target size. No
+sentence is ever cut in half.
 
-This document is a small synthetic fixture for RAG retrieval experiments.
+Piece lengths become uneven as a result, since the strategy stops short of the target
+whenever the next sentence will not fit. A passage of long sentences produces noticeably
+more variance than one of short ones.
+
+Naive splitting on a period mishandles abbreviations, decimal numbers, and ellipses. A
+segmenter that understands these cases, or at least a pattern requiring a following space
+and capital letter, avoids a long tail of one-word fragments.

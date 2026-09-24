@@ -1,0 +1,13 @@
+Comparing Embedding Models
+
+Hosted models are reached through an API, require a key, bill per unit of input, and
+offer no way to run offline. Local models download a weights file once and then run on
+the machine, trading setup effort and memory for zero marginal cost and full privacy.
+
+Benchmarks that rank models on general retrieval tasks are a starting point, not an
+answer. A model that leads a public leaderboard can still lose on a specific corpus whose
+vocabulary and phrasing differ from the benchmark data.
+
+The reliable comparison is a small labelled set drawn from the actual corpus, scored with
+the same metric for each candidate model. Twenty questions with known correct sources
+usually separate the contenders clearly.

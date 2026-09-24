@@ -1,0 +1,13 @@
+Streaming Responses
+
+Generating a full answer can take several seconds, during which a non-streaming endpoint
+shows the user nothing. Streaming emits tokens as they are produced, so text begins
+appearing almost immediately.
+
+Server-sent events are the simpler transport for one-directional output, needing only a
+suitable content type and a generator that yields formatted lines. WebSockets are warranted
+when the client must also send messages mid-response.
+
+Errors raised after the first byte cannot change the status code, since the headers have
+already gone out. The stream itself must carry an error event, and the client has to handle
+one arriving partway through.

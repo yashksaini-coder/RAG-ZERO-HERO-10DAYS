@@ -124,13 +124,27 @@ Create a comprehensive RAG prompt template system:
 
 **Example usage:**
 ```python
+from pathlib import Path
+
+assets = Path("../RAG assets")
+context = [
+    (assets / "documents/rag_intro.txt").read_text(),
+    (assets / "documents/vdb_concepts.txt").read_text(),
+]
+
 builder = RAGPromptBuilder()
-builder.add_context(["Doc 1 content", "Doc 2 content"])
-builder.set_question("What is RAG?")
+builder.add_context(context)
+builder.set_question("What is RAG?")          # q01 in evaluation_questions.json
 builder.set_format("bullet_points")
 builder.enable_citations(True)
 prompt = builder.build()
 ```
+
+**Test with:** `../RAG assets/documents/` for context and
+`../RAG assets/evaluation_questions.json` for questions. To exercise feature 4
+(fallback handling), use one of the questions marked `"kind": "unanswerable"` —
+those have no relevant documents by design, so a correct prompt makes the model
+decline rather than invent an answer.
 
 **Deliverable:** `task5_rag_prompt_builder.py`
 

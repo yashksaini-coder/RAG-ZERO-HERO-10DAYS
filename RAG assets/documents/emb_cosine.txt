@@ -1,0 +1,13 @@
+Cosine Similarity
+
+Cosine similarity measures the angle between two vectors and ignores their lengths. It is
+computed as the dot product divided by the product of the two magnitudes, and for
+embeddings it ranges in practice from roughly zero to one.
+
+Ignoring magnitude is usually what is wanted, because a longer passage tends to produce a
+vector with a larger norm without being more relevant. Euclidean distance would let that
+length difference dominate the comparison.
+
+Absolute scores are not comparable across different embedding models. One model may place
+unrelated sentences at 0.1 and another at 0.7, so any threshold has to be calibrated
+against the specific model in use rather than copied from a tutorial.

@@ -1,0 +1,13 @@
+Transformer Attention
+
+A transformer processes every position in the input at once and lets each position attend
+to all the others. The attention weights decide how much each position contributes to the
+updated representation of every other position.
+
+Because attention compares every pair of positions, its cost grows with the square of the
+sequence length. That quadratic term is the practical reason context windows are bounded
+and the reason long inputs are expensive even when the model technically accepts them.
+
+Stacking many attention layers with feed-forward blocks between them lets early layers
+capture local structure while later layers combine it into longer-range meaning. The
+final layer's representation is what downstream heads read to produce output.

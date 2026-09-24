@@ -1,0 +1,14 @@
+Answers That Are Not Supported by the Sources
+
+A language model will produce fluent, confident text whether or not the supplied passages
+justify it. The failure is not random noise; it reads exactly like a correct answer, which
+is what makes it dangerous.
+
+The usual trigger is a question the passages do not answer. Given nothing relevant, the
+model falls back on patterns learned in training and fills the gap with something
+plausible. Instructing it to decline, and giving it an explicit way to do so, removes much
+of the pressure to invent.
+
+Detection is a separate check: each claim in the output is compared against the passages
+that were actually provided, and anything unsupported is flagged. Requiring a citation per
+sentence makes that comparison mechanical.

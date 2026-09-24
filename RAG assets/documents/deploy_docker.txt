@@ -1,0 +1,13 @@
+Containerising the Application
+
+A container image bundles the interpreter, the dependencies, and the application so the
+runtime environment is identical everywhere it runs. Pinning the base image to a specific
+version keeps a rebuild from silently picking up a new interpreter.
+
+Copying the requirements file and installing before copying the source lets the layer cache
+skip reinstallation when only application code changed, which is the difference between a
+ten-second and a three-minute rebuild.
+
+Model weights and vector data should be mounted or downloaded at startup rather than baked
+in. Embedding hundreds of megabytes of data into the image makes every deployment slow and
+couples data updates to code releases.

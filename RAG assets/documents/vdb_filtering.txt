@@ -1,0 +1,13 @@
+Filtering by Metadata
+
+Metadata filters restrict which items are eligible before similarity is considered.
+Limiting a search to one source file, one section, or one date range prevents an unrelated
+but superficially similar item from occupying a result slot.
+
+Filters are cheap when the field is indexed and expensive when the engine must scan. Keep
+filterable fields to a small set of scalars, because most stores reject nested objects and
+lists in the metadata dictionary.
+
+Over-filtering is a real failure mode: a clause that matches nothing returns an empty
+result even though useful material exists. Reporting how many items survived the filter
+separates "nothing relevant" from "nothing eligible".

@@ -1,0 +1,13 @@
+Building an Interface with Streamlit
+
+Streamlit turns a Python script into a web interface without separate frontend code. The
+script re-executes top to bottom on every interaction, and widgets return their current
+value as ordinary return values.
+
+Because of that re-execution, anything expensive must be cached or it will be recomputed on
+every keystroke. Decorators cache pure data loading separately from long-lived resources
+such as a database connection.
+
+Values that must survive between runs belong in the session state dictionary. A chat
+history kept in a plain local variable is discarded on the next interaction, which is the
+first surprise most newcomers encounter.

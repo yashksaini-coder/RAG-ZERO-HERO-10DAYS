@@ -1,5 +1,13 @@
-Document: chunk_fixed
+Fixed-Size Chunking
 
-Fixed-size chunking creates predictable chunk lengths but can split sentences.
+Fixed-size chunking walks the text and cuts at a set number of characters or tokens. The
+resulting pieces have predictable lengths, which makes capacity planning straightforward
+and keeps every piece comfortably inside a model's input limit.
 
-This document is a small synthetic fixture for RAG retrieval experiments.
+The cost is that cuts land wherever the counter happens to reach the limit, frequently
+mid-sentence and occasionally mid-word. A piece that begins halfway through a clause can
+read as nonsense when it is later shown to a model as evidence.
+
+The strategy remains a reasonable default for uniform material such as transcripts or
+logs, where paragraph structure carries little meaning and predictable sizing matters
+more than clean boundaries.

@@ -1,0 +1,13 @@
+Choosing Vector Dimensions
+
+Model families publish several sizes, and a larger output length can capture finer
+distinctions at the cost of more storage and slower comparison. Storage grows linearly:
+doubling the length doubles the bytes for every item held.
+
+Some models are trained so that a prefix of the full vector remains usable on its own.
+Where that property holds, a shortened vector can be stored for a first pass and the full
+one consulted only for the surviving candidates.
+
+Vectors from different models cannot be mixed in one collection even when their lengths
+coincide, because each model learned its own arrangement of the space. Changing models
+means re-encoding the entire collection.

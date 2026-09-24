@@ -1,0 +1,14 @@
+Working with Chroma Collections
+
+Chroma organises data into collections, each of which holds documents, identifiers,
+optional metadata dictionaries, and the vectors themselves. Creating a client with a
+persistence path writes the collection to disk so it survives a restart.
+
+Adding items requires an identifier per document. Reusing an existing identifier updates
+that entry rather than inserting a duplicate, which makes re-indexing a changed file
+straightforward as long as identifiers are derived deterministically from the source.
+
+Queries accept either raw text, in which case the collection embeds it with its configured
+function, or a vector computed by the caller. A where clause filters on metadata before
+the similarity comparison, narrowing the candidate set rather than discarding results
+afterwards.

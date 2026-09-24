@@ -37,7 +37,14 @@ Build a complete RAG system using LangChain `langchain_rag.py`:
 - Return sources with answers
 - Handle errors gracefully
 
-**Test with:** Multiple documents
+**Test with:** `../RAG assets/documents/` (61 `.txt` files),
+`../RAG assets/sample_rag_manual.pdf` and `../RAG assets/sample_technical_doc.md`
+— three loader types, which is what "support multiple document types" means here.
+The Markdown file has nested headings, a list, a table and a fenced code block, so
+a structure-aware splitter has something to preserve.
+
+Use the same chunk size and overlap you used on Day 7. The comparison in the mini
+project is only meaningful if the two implementations index identical input.
 
 **Deliverable:** `task1_langchain_rag.py`
 
@@ -61,7 +68,7 @@ Build a complete RAG system using LlamaIndex `llamaindex_rag.py`:
 - Source retrieval
 - Error handling
 
-**Test with:** Same documents as Task 1
+**Test with:** the same files, the same chunk settings and the same questions from `../RAG assets/test_queries.txt` as Task 1. Score both against the `relevance_grades` in `../RAG assets/evaluation_questions.json` — a framework comparison based on which answer *reads* better is not a comparison.
 
 **Deliverable:** `task2_llamaindex_rag.py`
 
@@ -195,14 +202,14 @@ Create a comprehensive application `framework_rag_comparison.py` that demonstrat
 **Example Usage:**
 ```python
 app = FrameworkComparison()
-app.load_documents("./documents/")
+app.load_documents("../RAG assets/documents/")
 
 # Index with both
 app.index_langchain()
 app.index_llamaindex()
 
 # Compare
-results = app.compare_query("What is machine learning?")
+results = app.compare_query("What is the difference between lexical and semantic search?")   # q11
 print("LangChain:", results["langchain"]["answer"])
 print("LlamaIndex:", results["llamaindex"]["answer"])
 print("Similarity:", results["similarity_score"])
@@ -237,9 +244,10 @@ result = qa_chain({"query": "What is Python?"})
 ### Task 2 Expected Output:
 ```python
 # LlamaIndex RAG
+documents = SimpleDirectoryReader("../RAG assets/documents").load_data()
 index = VectorStoreIndex.from_documents(documents)
 query_engine = index.as_query_engine()
-response = query_engine.query("What is Python?")
+response = query_engine.query("What is retrieval-augmented generation?")   # q01
 
 # Output:
 ResponseObject with:
@@ -294,6 +302,10 @@ Comparison:
 - Time difference: 0.3s (LlamaIndex faster)
 - Token difference: 5 tokens
 - Source overlap: 2/3 documents
+
+Because q01's answering documents are recorded as `doc-038` and `doc-039`, the
+source overlap above can be scored against ground truth rather than against
+whichever framework you happened to run first.
 ```
 
 ---

@@ -1,0 +1,12 @@
+When Retrieval Is the Wrong Tool
+
+Retrieval helps when an answer exists verbatim somewhere in a collection. It does not help
+with questions that require aggregating across every document, such as counting how many
+records satisfy a condition, because only a handful of passages are ever consulted.
+
+Questions about the structure of the data rather than its content are better served by a
+query language against a database. Asking for the most recent entry is a sorting operation,
+not a similarity one.
+
+Tasks that need reasoning over material already supplied, or a change in the model's style
+rather than its knowledge, are likewise served by prompting or fine-tuning instead.

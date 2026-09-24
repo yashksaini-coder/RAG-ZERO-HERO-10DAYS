@@ -1,0 +1,7 @@
+Retrieval-augmented generation answers a question using text the system looked up first.
+The lookup step searches a collection and returns the passages most likely to bear on the question.
+Those passages are placed into the prompt alongside the question itself.
+The model then writes an answer that is supposed to rest on the supplied passages rather than on memory.
+Because the passages carry identifiers, each sentence of the answer can be traced back to a source.
+Is that always reliable? No: a model asked a question the passages do not cover may still answer confidently.
+That failure is the reason evaluation sets include questions the collection cannot answer!

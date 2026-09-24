@@ -1,0 +1,13 @@
+Handling API Keys
+
+A key committed to a repository is compromised the moment the repository is shared, and
+remains in the history after it is deleted from the current files. Rotating the key is the
+only real remedy once that has happened.
+
+Keys belong in environment variables loaded from a file that version control ignores, or in
+a managed secret store that supplies them at runtime. The application should read the value
+at startup and fail loudly when it is absent.
+
+Keys also leak through logs and error reports. Redacting anything that looks like a
+credential before writing a request to a log prevents a debugging aid from becoming a
+disclosure.

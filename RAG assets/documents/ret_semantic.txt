@@ -1,0 +1,13 @@
+Semantic Retrieval
+
+Semantic retrieval encodes the query with the same model used for the collection and ranks
+stored items by closeness in vector space. A question and a passage that never share a word
+can still rank first if the model places them near each other.
+
+This handles paraphrase, synonymy, and indirect phrasing, which is exactly where term
+matching fails. It is the reason a question written in plain language can find a passage
+written in technical vocabulary.
+
+The weakness is the mirror image: exact strings carry no special weight. A precise error
+code or version number may be outranked by a passage that discusses the same subject in
+general terms without containing the string at all.

@@ -1,10 +1,75 @@
-How does retrieval augmented generation work?
-How can I find documents by meaning rather than exact words?
-What is the difference between lexical and semantic search?
-How should I split documents before embedding them?
-How can I improve the ranking of retrieved results?
-What metadata should I store with chunks?
-How can I expose a RAG system through an API?
-How can I build a simple interface for a Python RAG app?
-How should I evaluate whether a RAG answer is correct?
+# One query per line, blank lines and # comments ignored.
+# Graded relevance for each of these lives in evaluation_questions.json.
+
+# --- Ordinary lookups (50) ---
+What is retrieval-augmented generation?
+How is a RAG system's indexing stage different from its query stage?
+Why do all my documents look similar when I compare their embeddings?
+Should I normalise vectors before computing cosine similarity?
+How large should an audio chunk be when reading a wave file?
+Why does my chunking loop never finish?
+What is BM25 and when does it fail?
+How do I combine keyword and vector search, and how do I pick the weight?
+How does reciprocal rank fusion work?
+How can I improve the ordering of my retrieved results?
+Why can't a reranker fix a passage that retrieval never returned?
+How do I generate alternative phrasings of a user's question?
+How do I deduplicate results when searching with several query variations?
+How many passages should I pass to the model?
+How do I stop the prompt from exceeding the context limit?
+How do I count tokens to estimate cost?
+How do I make a RAG answer cite its sources?
+What should the instruction in an augmented prompt say?
+Can a retrieved document contain instructions that hijack the model?
 How should API keys be handled in a deployed application?
+Why does my filtered search return nothing?
+How do I make a Chroma collection survive a restart?
+Do I have to re-index when I change embedding model?
+How does an approximate nearest neighbour index avoid comparing everything?
+How many questions do I need in an evaluation set, and what should they cover?
+How do I tell whether a change to my pipeline actually helped?
+How do I judge whether an answer is correct without exact string matching?
+How can I expose a RAG system through an HTTP API?
+How do I show the answer while it is still being generated?
+Why does my Streamlit chat history disappear?
+How should I containerise this application?
+What should I log for each request?
+What should I cache in a RAG system?
+How should I handle being rate limited by the provider?
+How do I embed a large number of documents efficiently?
+Should I use a hosted or a local embedding model?
+Is RAG the right approach for counting how many records match a condition?
+What does an embedding actually represent?
+What does a vector database give me over a plain list of vectors?
+Why does mutating a default list argument cause bugs?
+How do I stop garbled characters appearing in extracted text?
+What is the cleanest way to define a record type that holds named fields?
+How should I structure try and except blocks?
+Why should each project get its own virtual environment?
+Why does indentation matter in Python?
+My training score keeps improving but my test score doesn't. What is happening?
+Why is attention expensive on long inputs?
+Why is TF-IDF high for some words and not others?
+How do I keep my chunks from cutting sentences in half?
+Where should chunk size and result count be configured?
+
+# --- Needing more than one source (5) ---
+How should I split documents before embedding them?
+What is the difference between lexical and semantic search?
+What metadata should I store alongside each passage?
+How do I measure whether my retrieval is any good?
+What is the difference between learning from labelled and unlabelled data?
+
+# --- Vocabulary mismatch (lexical search alone will miss these) (2) ---
+Why is a two-stage retrieval pipeline cheaper than scoring the whole index?
+Why does the model make things up when it doesn't know?
+
+# --- Lexical traps (an unrelated document shares the keywords) (2) ---
+What chunk size should I use?
+How do I read a file one chunk at a time in Python?
+
+# --- Unanswerable from this corpus (a correct system declines) (4) ---
+What were this company's quarterly earnings last year?
+How do I get a mortgage pre-approval in Ireland?
+Which Kubernetes ingress controller should I choose?
+How long should I bake sourdough and at what temperature?

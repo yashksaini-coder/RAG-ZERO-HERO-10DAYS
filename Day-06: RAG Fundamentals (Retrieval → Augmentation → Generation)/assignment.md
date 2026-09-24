@@ -36,7 +36,7 @@ Build a complete RAG system `basic_rag.py`:
 - Simple prompt template
 - Return answer and sources
 
-**Test with:** 10+ documents on a specific topic
+**Test with:** the `retrieval` topic in `../RAG assets/documents/` — 9 documents on one subject, or filter `../RAG assets/documents_metadata.json` on `topic == "rag"` for 8 more. Use the whole 61-document set once that works.
 
 **Deliverable:** `task1_basic_rag.py`
 
@@ -58,7 +58,7 @@ Enhance your RAG to include citations `rag_with_citations.py`:
 - LLM should cite sources in answer
 - Return structured results with citations
 
-**Test with:** Documents from different sources
+**Test with:** `../RAG assets/documents_metadata.json`, which carries a distinct `source` path, `title` and `topic` per document — that is what your citations should render. `../RAG assets/evaluation_questions.json` lists the document each question should be answered from, so you can check whether the model cited the right one rather than a plausible-looking one.
 
 **Deliverable:** `task2_rag_citations.py`
 
@@ -80,7 +80,7 @@ Implement similarity-based filtering `filtered_rag.py`:
 - Test with different thresholds
 - Compare results
 
-**Test with:** Various queries and thresholds
+**Test with:** `../RAG assets/test_queries.txt`. The four questions marked `"kind": "unanswerable"` in `../RAG assets/evaluation_questions.json` have no relevant document in the corpus at all, and `offtopic_sourdough` / `offtopic_tomatoes` are deliberately out of domain. Those are what let you see a threshold working: with a sensible threshold the unanswerable questions should leave you with **zero** chunks, which is requirement 4 above.
 
 **Deliverable:** `task3_filtered_rag.py`
 
@@ -210,23 +210,23 @@ python rag_system.py
 === RAG System ===
 Choose: 1
 
-Enter document path: ./documents
+Enter document path: ../RAG assets/documents
 Processing...
-✓ Indexed 5 documents
-✓ Created 23 chunks
+✓ Indexed 61 documents
+✓ Created 161 chunks
 
 Choose: 2
 
-Question: What is machine learning?
+Question: What is supervised learning?
 [Searching...]
 
 Answer:
-Machine learning is a subset of artificial intelligence that enables systems to learn from data...
+Supervised learning fits a model to pairs of inputs and known correct outputs...
 
 Sources:
-1. [0.89] ai_textbook.pdf, Page 5
-2. [0.85] ml_guide.pdf, Page 2
-3. [0.82] intro_ai.pdf, Page 10
+1. [0.89] documents/ml_supervised.txt | topic: ml
+2. [0.85] documents/ml_overfitting.txt | topic: ml
+3. [0.82] documents/eval_retrieval_metrics.txt | topic: evaluation
 
 [1] Ask another question
 [2] View full sources
@@ -247,42 +247,55 @@ Sources:
 
 ### Task 1 Expected Output:
 ```python
-rag = BasicRAG()
-rag.add_documents(["Doc 1 text...", "Doc 2 text..."])
+from pathlib import Path
 
-result = rag.query("What is Python?")
+docs = sorted(Path("../RAG assets/documents").glob("*.txt"))
+
+rag = BasicRAG()
+rag.add_documents([p.read_text() for p in docs])
+
+result = rag.query("Why does indentation matter in Python?")   # q53
 # Output:
 {
-    "answer": "Python is a high-level programming language...",
+    "answer": "Indentation is syntax in Python: it marks the body of a block...",
     "sources": [
-        "Python is a programming language created in 1991...",
-        "Python supports multiple programming paradigms..."
+        "Python uses indentation rather than braces to mark the body of a function...",
+        "A consistent four-space indent is the community convention..."
     ]
 }
 ```
 
 ### Task 2 Expected Output:
 ```python
-result = rag_with_citations.query("What is RAG?")
+result = rag_with_citations.query("What is retrieval-augmented generation?")   # q01
 # Output:
 {
-    "answer": "According to document1.pdf, RAG stands for Retrieval-Augmented Generation...",
+    "answer": "According to documents/rag_intro.txt, RAG puts a lookup step in front of a language model...",
     "sources": [
-        {"text": "...", "source": "document1.pdf", "page": 3},
-        {"text": "...", "source": "document2.pdf", "page": 1}
+        {"text": "...", "id": "doc-038", "source": "documents/rag_intro.txt", "topic": "rag"},
+        {"text": "...", "id": "doc-039", "source": "documents/rag_pipeline.txt", "topic": "rag"}
     ]
 }
+
+`evaluation_questions.json` lists `doc-038` as the answering document for q01, so
+you can assert the citation rather than read it.
 ```
 
 ### Task 3 Expected Output:
 ```
-Query: "machine learning"
+Query: "What is supervised learning?"
 Threshold: 0.7
 
 Retrieved 5 chunks, 3 above threshold (0.7)
 Using top 3 chunks for answer...
 
 Answer: [Generated answer using filtered chunks]
+
+Query: "How do I get a mortgage pre-approval in Ireland?"   # q61, unanswerable
+Threshold: 0.7
+
+Retrieved 5 chunks, 0 above threshold (0.7)
+No chunk passed the threshold. Declining to answer.
 ```
 
 ### Mini Project Expected Output:
@@ -299,19 +312,19 @@ The RAG system should provide:
 === RAG System ===
 Choose: 2
 
-Question: How does neural network training work?
+Question: Why is attention expensive on long inputs?
 
 [Retrieving relevant chunks...]
 [Generating answer...]
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Answer:
-Neural network training involves feeding data through the network, calculating errors, and adjusting weights through backpropagation...
+Attention compares every pair of positions, so its cost grows with the square of the sequence length...
 
 Sources (Top 3):
-1. [0.91] neural_networks.pdf | Page 12
-2. [0.87] deep_learning.pdf | Page 5
-3. [0.84] ai_basics.pdf | Page 8
+1. [0.91] documents/ml_transformers.txt | topic: ml
+2. [0.87] documents/ml_tokenization.txt | topic: ml
+3. [0.84] documents/rag_context_window.txt | topic: rag
 
 Similarity scores shown in brackets
 ```

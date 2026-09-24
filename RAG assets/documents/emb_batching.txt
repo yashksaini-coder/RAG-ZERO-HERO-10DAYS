@@ -1,0 +1,13 @@
+Batching Embedding Requests
+
+Sending one request per item wastes most of the wall-clock time on network round trips.
+Providers accept a list of inputs in a single call, and grouping items into batches of a
+few dozen to a few hundred typically cuts total time by an order of magnitude.
+
+Batch size is bounded by the provider's limit on total units per request, so a batch of
+long passages must be smaller than a batch of short ones. Splitting on a running unit
+count rather than a fixed item count keeps requests inside the limit.
+
+Failures should be retried with an increasing delay and a little random jitter, so that
+many workers backing off at once do not synchronise into a second burst. Recording which
+items succeeded lets a resumed run skip work already paid for.

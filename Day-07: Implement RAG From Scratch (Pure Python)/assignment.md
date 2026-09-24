@@ -24,9 +24,10 @@ pip install openai numpy pypdf
 Implement each core component as a separate class:
 
 1. **DocumentLoader** (`document_loader.py`)
-   - Load .txt files
-   - Load .pdf files
-   - Handle errors
+   - Load .txt files — `../RAG assets/documents/` (61 files)
+   - Load .pdf files — `../RAG assets/sample_rag_manual.pdf` (10 pages)
+   - Handle errors — `../RAG assets/empty.txt` (zero bytes) and
+     `../RAG assets/malformed.html` (not a document type you support)
    - Return clean text
 
 2. **TextChunker** (`text_chunker.py`)
@@ -68,7 +69,7 @@ Create `rag_system.py` that integrates all components:
 - Complete pipeline: Load → Chunk → Embed → Store → Retrieve → Augment → Generate
 - Return structured results
 
-**Test with:** Multiple documents and various questions
+**Test with:** `../RAG assets/documents/` and the questions in `../RAG assets/test_queries.txt`. Because `../RAG assets/evaluation_questions.json` records the document each question should be answered from, you can score this from-scratch implementation and then score the framework version on Day 8 against the same numbers — which is the entire point of Day 8's comparison task.
 
 **Deliverable:** `task2_rag_system.py`
 
@@ -225,11 +226,11 @@ from production_rag import ProductionRAG
 rag = ProductionRAG(config_file="config.json")
 
 # Index documents
-rag.index_document("doc1.pdf")
-rag.index_directory("./documents/")
+rag.index_document("../RAG assets/sample_rag_manual.pdf")
+rag.index_directory("../RAG assets/documents/")
 
 # Query
-result = rag.query("What is machine learning?")
+result = rag.query("What is supervised learning?")   # q54
 print(result["answer"])
 print(f"Sources: {len(result['sources'])}")
 
@@ -253,15 +254,15 @@ print(f"Total chunks: {stats['total_chunks']}")
 ### Task 2 Expected Output:
 ```python
 rag = RAGSystem()
-rag.index_document("document.pdf")
-# Output: "Indexed document.pdf: 15 chunks"
+rag.index_document("../RAG assets/sample_rag_manual.pdf")
+# Output: "Indexed sample_rag_manual.pdf: 30 chunks"   (at chunk_size=500, overlap=50)
 
 result = rag.query("What is the main topic?")
 # Output:
 {
     "answer": "The main topic is...",
     "sources": [
-        {"text": "...", "source": "document.pdf", "chunk_id": 1},
+        {"text": "...", "source": "../RAG assets/sample_rag_manual.pdf", "page": 1, "chunk_id": 1},
         ...
     ],
     "similarities": [0.89, 0.85, 0.82]
@@ -297,26 +298,27 @@ The production system should be:
 === Production RAG System ===
 Choose: 1
 
-Enter document path: document.pdf
+Enter document path: ../RAG assets/sample_rag_manual.pdf
 [Indexing...]
 ✓ Loaded document
-✓ Created 15 chunks
+✓ Created 30 chunks
 ✓ Generated embeddings
 ✓ Stored in vector database
 Indexed successfully!
 
 Choose: 3
 
-Question: What is RAG?
+Question: What is retrieval-augmented generation?
 [Processing...]
 
 Answer:
-RAG stands for Retrieval-Augmented Generation...
+RAG puts a lookup step in front of a language model: the question retrieves
+relevant passages, and those passages go into the prompt...
 
 Sources (3):
-1. [0.91] document.pdf, chunk 5
-2. [0.87] document.pdf, chunk 8
-3. [0.84] document.pdf, chunk 12
+1. [0.91] sample_rag_manual.pdf, page 1, chunk 2
+2. [0.87] sample_rag_manual.pdf, page 2, chunk 5
+3. [0.84] sample_rag_manual.pdf, page 8, chunk 23
 ```
 
 ---

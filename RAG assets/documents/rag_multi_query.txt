@@ -1,0 +1,13 @@
+Multi-Query Retrieval
+
+Multi-query retrieval issues several formulations of one question and pools the results.
+Where a single phrasing might miss a passage that uses different words, the union of several
+phrasings is far more likely to include it.
+
+Pooling requires deduplication, since the same passage will surface for more than one
+formulation. Merging on the passage identifier and keeping the best rank achieved is the
+simplest correct approach.
+
+The cost is one search per formulation plus the generation call that produced them. Running
+the searches concurrently keeps the added latency close to that of the slowest single
+search rather than their sum.

@@ -1,0 +1,13 @@
+Selecting Supporting Evidence for an Answer
+
+Before a question can be answered from a collection of writing, some part of that writing
+has to be identified as bearing on the question. Reading everything is impossible past a
+trivial size, so a narrowing step must come first.
+
+A good narrowing step is judged on two things: whether the material that actually contains
+the answer survives it, and how much unrelated material it drags along. Losing the answer
+is fatal, whereas a little extra noise merely costs the reader time.
+
+Once a small candidate set exists, a slower and more careful pass can afford to read each
+candidate closely and put the most useful one first. Cheap-then-careful is the standard
+shape, because the careful method is almost always too expensive to run over everything.

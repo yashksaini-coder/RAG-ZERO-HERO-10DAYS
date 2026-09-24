@@ -1,0 +1,13 @@
+Overlap Between Chunks
+
+Overlap repeats a tail of each piece at the head of the next one. A fact stated across a
+boundary then appears complete in at least one piece, instead of being halved and lost by
+both.
+
+A common starting point is ten to twenty percent of the target size. Larger overlaps
+increase storage and cause the same sentence to surface several times in a result list,
+crowding out genuinely different material.
+
+Overlap must be strictly smaller than the piece size. When the two are equal the window
+never advances and the loop that produces pieces runs forever, which is the most common
+bug in a hand-written splitter.

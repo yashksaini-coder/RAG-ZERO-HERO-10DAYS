@@ -1,0 +1,12 @@
+Comparing Two Configurations
+
+Changing several settings at once and observing a better score reveals nothing about which
+change was responsible. Varying one factor while holding the rest fixed is what makes a
+result attributable.
+
+The comparison must use the same questions, the same labels, and the same metric for both
+configurations, with any randomness seeded so that a repeated run reproduces the number.
+
+Small differences on a small question set are noise. Reporting per-question outcomes
+alongside the aggregate shows whether a change helped broadly or merely swung two questions
+that happened to move together.

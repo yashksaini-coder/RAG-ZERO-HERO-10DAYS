@@ -1,5 +1,0 @@
-Document: metadata
-
-Metadata such as source, page, section, and chunk index makes retrieval results traceable.
-
-This document is a small synthetic fixture for RAG retrieval experiments.

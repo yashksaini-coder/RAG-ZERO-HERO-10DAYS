@@ -1,0 +1,13 @@
+Tokenisation
+
+Language models do not consume characters directly. A tokeniser first maps text onto a
+vocabulary of sub-word units, so a common word occupies a single unit while a rare one is
+assembled from several fragments.
+
+This is why a budget expressed in tokens does not translate cleanly into words. English
+prose runs at roughly three-quarters of a word per token, but code, tables, non-Latin
+scripts, and long identifiers consume far more units for the same visible length.
+
+Counting tokens with the same tokeniser the target model uses is the only accurate way to
+predict whether a prompt fits, and it is what any cost estimate has to be based on, since
+providers bill by unit rather than by character.

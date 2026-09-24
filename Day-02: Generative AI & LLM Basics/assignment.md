@@ -57,6 +57,19 @@ Create a utility that:
 
 **Bonus:** Use the `tiktoken` library for more accurate token counting.
 
+**Test with:** text of different shapes, because the "1 token ≈ 4 characters"
+heuristic breaks differently on each:
+
+| File | Why |
+| --- | --- |
+| `../RAG assets/documents/rag_intro.txt` | ordinary English prose — the case the heuristic is tuned for |
+| `../RAG assets/sample_technical_doc.md` | contains a table and a fenced code block, which consume far more tokens per visible character |
+| `../RAG assets/messy_text.txt` | control characters, mojibake and non-breaking spaces, which tokenise badly |
+| `../RAG assets/long_rag_corpus.txt` | ~6,800 words, for checking the estimate holds at length |
+
+Report the error of your estimate per file rather than as a single average —
+that is where you will see the heuristic fail.
+
 **Deliverable:** `task3_token_counter.py`
 
 ---

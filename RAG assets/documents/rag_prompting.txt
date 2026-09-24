@@ -1,0 +1,14 @@
+Assembling the Augmented Prompt
+
+The prompt given to the model normally carries an instruction, the retrieved passages each
+marked with an identifier, and the user's question. Separating the three with clear
+delimiters keeps the model from mistaking the question for part of the evidence.
+
+The instruction should state explicitly that the answer must come from the supplied
+passages, and that the model is to say it does not know when they do not contain one.
+Without that sentence the model falls back on training knowledge and the citations stop
+meaning anything.
+
+Ordering matters because models attend unevenly across a long context. Placing the
+strongest passage first, or repeating the question after the passages, measurably improves
+answers once the assembled context grows large.

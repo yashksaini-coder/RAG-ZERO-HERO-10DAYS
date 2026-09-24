@@ -1,0 +1,13 @@
+Query Rewriting and Expansion
+
+User questions are often short, ambiguous, or phrased in vocabulary the corpus does not
+use. Rewriting generates several alternative formulations, each of which is searched
+separately before the results are merged.
+
+Useful variations include a literal paraphrase, a version using domain terminology, a
+version stripped to its key nouns, and a hypothetical answer whose wording is likely to
+resemble the passage being sought.
+
+In a multi-turn conversation the rewrite must also resolve references to earlier messages.
+A follow-up consisting of "and the second one?" carries no retrievable content until the
+pronoun is replaced with what it refers to.

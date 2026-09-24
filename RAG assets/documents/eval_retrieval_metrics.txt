@@ -1,0 +1,12 @@
+Measuring Retrieval Quality
+
+Recall at k asks whether a known correct source appears anywhere in the first k results. It
+is the ceiling on the whole system, because a passage that never reaches the generator
+cannot contribute to the answer.
+
+Precision at k asks what fraction of those k results are relevant, which matters because
+irrelevant passages consume budget and distract the model. Mean reciprocal rank rewards
+placing the correct source early rather than merely including it.
+
+Reporting recall and a rank-sensitive measure together is the informative pair. Recall alone
+hides a system that finds the right passage but buries it in tenth place.

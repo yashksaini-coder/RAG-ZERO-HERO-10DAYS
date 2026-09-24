@@ -1,0 +1,13 @@
+TF-IDF Weighting
+
+TF-IDF weights a term by how often it occurs in one document against how rarely it occurs
+across the collection. The product is high for a word that is frequent here and unusual
+elsewhere, which is the intuition behind treating it as descriptive of this document.
+
+Representing each document as a vector of such weights turns ranking into a similarity
+computation over sparse vectors. Most entries are zero because most vocabulary terms are
+absent from any given document.
+
+BM25 is the refinement that most systems now use, adding saturation and length correction
+to the same underlying idea. TF-IDF remains useful as an explanation of why rare terms
+carry the signal.

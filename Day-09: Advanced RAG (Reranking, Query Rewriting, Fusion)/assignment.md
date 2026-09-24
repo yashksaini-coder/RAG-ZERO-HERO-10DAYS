@@ -34,7 +34,14 @@ Build a query rewriting system `query_rewriter.py`:
 - Compare retrieval results
 - Document improvements
 
-**Test with:** Various question types
+**Test with:** `../RAG assets/test_queries.txt`, which is grouped by question type
+exactly for this task. The `vocabulary_mismatch` group is where rewriting should pay
+off most: those questions are phrased in words the answering document never uses, so
+a rewrite that introduces the document's vocabulary is the difference between finding
+it and not.
+
+Measure against `relevance_grades` in `../RAG assets/evaluation_questions.json` —
+"test if variations improve retrieval" needs a number, and that is where the labels are.
 
 **Deliverable:** `task1_query_rewriter.py`
 
@@ -56,7 +63,15 @@ Add reranking to your RAG system `reranking_rag.py`:
 - Rerank top 10, return top 5
 - Show score improvements
 
-**Test with:** Various queries and measure improvement
+**Test with:** `../RAG assets/test_queries.txt`, scored against the
+`relevance_grades` in `../RAG assets/evaluation_questions.json` (`2` = answers the
+question, `1` = supporting context). Report recall@5 and MRR before and after
+reranking; "measure improvement" is not answerable without labels.
+
+The `lexical_trap` questions are the clearest demonstration. For *"What chunk size
+should I use?"* a BM25 first stage ranks `audio_chunk_module` first — it is saturated
+with the word *chunk* but is about reading audio frames — while the document that
+actually answers is `chunk_size_tradeoff`. A working reranker moves it to the top.
 
 **Deliverable:** `task2_reranking_rag.py`
 
@@ -78,6 +93,11 @@ Implement fusion `fusion_rag.py`:
 - Compare fused vs single retrieval
 - Measure improvement
 
+**Test with:** the same query set and labels. Fusion should help most on the
+`multi_source` questions in `../RAG assets/evaluation_questions.json`, which have more
+than one document graded `2` — a single retrieval strategy tends to find one of them
+and miss the other.
+
 **Deliverable:** `task3_fusion_rag.py`
 
 ---
@@ -97,6 +117,20 @@ Build hybrid search `hybrid_search.py`:
 - Combine with semantic search
 - Test different alpha values (0.0 to 1.0)
 - Find optimal balance
+
+**Test with:** `../RAG assets/documents/` and `../RAG assets/test_queries.txt`. The
+corpus is built so the alpha sweep has something to find:
+
+- `lexical_trap` questions punish alpha near pure-BM25 (`audio_chunk_module` wins on
+  keywords alone)
+- `vocabulary_mismatch` questions punish alpha near pure-semantic-free retrieval —
+  `evidence_selection` describes retrieval without using the words *retrieval*,
+  *search*, *chunk* or *RAG*, and `rag_grounding` describes hallucination without
+  using that word, so BM25 cannot reach either
+
+Plot your metric against alpha over the whole query set. If the curve is flat, check
+that you normalised the two score scales before blending: a BM25 score is unbounded
+while cosine sits near 1.
 
 **Deliverable:** `task4_hybrid_search.py`
 
@@ -222,48 +256,56 @@ print(f"Improvement: {result['improvement_metrics']}")
 
 ### Task 1 Expected Output:
 ```python
-variations = rewrite_query("How does ML work?")
+# q17, a vocabulary_mismatch question: the answering document never uses the
+# word "hallucination", so the original phrasing is hard to retrieve on.
+variations = rewrite_query("Why does the model make things up when it doesn't know?")
 # Output:
 [
-    "How does machine learning work?",
-    "What is the process of machine learning?",
-    "How do ML algorithms learn?",
-    "Explain machine learning mechanism",
-    "How is machine learning implemented?"
+    "Why does a language model produce unsupported answers?",
+    "What causes hallucination in RAG systems?",
+    "How do I stop the model inventing facts not in the sources?",
+    "grounding answers in retrieved passages",
+    "model declines when context is insufficient"
 ]
 
-# Test retrieval improvement
-basic_results = retrieve("How does ML work?")
+# Test retrieval improvement against the labels
+basic_results = retrieve("Why does the model make things up when it doesn't know?")
 advanced_results = retrieve_multiple(variations)
-# Advanced finds 40% more relevant documents
+# Expected answering document: rag_grounding (graded 2 for q17)
 ```
 
 ### Task 2 Expected Output:
 ```
-Before Reranking:
-1. Doc A (0.85)
-2. Doc B (0.82)
-3. Doc C (0.80)
+Query: "What chunk size should I use?"   # q06, lexical_trap
+Ground truth: chunk_size_tradeoff (grade 2)
 
-After Reranking:
-1. Doc C (0.92) ← Better match!
-2. Doc A (0.88)
-3. Doc B (0.85)
+Before Reranking (BM25 top 3):
+1. audio_chunk_module   (9.12)  ← keyword match, wrong topic
+2. deploy_config        (8.32)
+3. chunk_size_tradeoff  (4.98)  ← the document that answers
 
-Improvement: Top result relevance increased by 8%
+After Reranking (cross-encoder; scores below are illustrative):
+1. chunk_size_tradeoff  (0.94)  ← moved to the top
+2. chunk_overlap        (0.71)
+3. audio_chunk_module   (0.08)  ← demoted
+
+Improvement: recall@1 0.00 -> 1.00, MRR 0.33 -> 1.00
 ```
 
 ### Task 3 Expected Output:
 ```
-Single Retrieval: Found 3 relevant docs
-Fusion (3 strategies): Found 5 relevant docs
-Improvement: 67% more relevant results
+Query: "How should I split documents before embedding them?"   # q05, multi_source
+Ground truth: chunk_fixed, chunk_sentence, chunk_paragraph (all grade 2)
+
+Single Retrieval (semantic): 2 of 3 graded documents in top 5
+Fusion (semantic + BM25 + rewritten query, RRF): 3 of 3 in top 5
+Improvement: recall@5 0.67 -> 1.00
 ```
 
 ### Task 5 Expected Output:
 ```
 === Advanced RAG Query ===
-Question: "What is Python?"
+Question: "Why is a two-stage retrieval pipeline cheaper than scoring the whole index?"   # q16
 
 [Query Rewriting] Generated 4 variations
 [Multiple Retrieval] Found 12 candidates
@@ -271,7 +313,8 @@ Question: "What is Python?"
 [Reranking] Reordered top 5
 [Generation] Generated answer
 
-Answer: Python is a high-level programming language...
+Answer: Narrow to a small candidate set with a cheap method first, then spend the
+expensive method only on the survivors...
 
 Improvement Metrics:
 - Retrieval: +45% relevant docs
@@ -302,12 +345,13 @@ Question: "Explain neural networks"
 ✓ Generated answer
 
 Answer:
-Neural networks are computing systems inspired by...
+Narrow to a small candidate set with a cheap method first, then spend the
+expensive, more accurate method only on the survivors...
 
 Sources (Top 5, reranked):
-1. [0.94] neural_networks.pdf | Page 3
-2. [0.91] deep_learning.pdf | Page 1
-3. [0.89] ai_basics.pdf | Page 7
+1. [0.94] documents/evidence_selection.txt | topic: retrieval
+2. [0.91] documents/ret_rerank.txt | topic: retrieval
+3. [0.89] documents/ret_topk.txt | topic: retrieval
 ...
 
 Comparison with Basic RAG:
