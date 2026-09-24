@@ -319,7 +319,7 @@ Answer based only on the provided context."""
 
 # Usage
 rag = RAGSystem()
-rag.index_document("document.pdf")
+rag.index_document("../RAG assets/sample_rag_manual.pdf")
 result = rag.query("What is the main topic?")
 print(result["answer"])
 ```

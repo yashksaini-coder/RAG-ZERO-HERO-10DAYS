@@ -20,7 +20,9 @@ This roadmap takes you from Python fundamentals all the way to building and depl
 
 1. **Study Day-by-Day**: Follow the roadmap sequentially, starting with Day 1
 2. **Read the Notes**: Open each day's folder and read the `README.md` file thoroughly
-3. **Complete Assignments**: Work through the `assignment.md` file for hands-on practice
+3. **Complete Assignments**: Work through the `assignment.md` file for hands-on practice.
+   Each task names the file in `RAG assets/` it expects, so you can start coding
+   immediately rather than building test data first.
 4. **Practice Regularly**: Code along with the examples and complete all practice tasks
 5. **Build Projects**: Each day includes a mini-project to reinforce your learning
 
@@ -132,8 +134,61 @@ rag-roadmap/
 │   ├── README.md
 │   └── assignment.md
 │
+├── RAG assets/              (practice data used by every day)
+│   ├── documents/           61 topic documents
+│   ├── documents.csv
+│   ├── documents_metadata.json
+│   ├── evaluation_questions.json   63 questions with relevance labels
+│   ├── test_queries.txt
+│   ├── sample.txt
+│   ├── sample_rag_manual.pdf       10-page PDF
+│   ├── sample_article.html
+│   ├── sample_technical_doc.md
+│   ├── long_rag_corpus.md / .txt
+│   ├── messy_text.txt, malformed.html, empty.txt   (edge cases)
+│   ├── _build/              generator and verifier
+│   └── README.md
+│
+├── RAG Projects/
+│   └── readme.md
+│
 └── README.md   (this file)
 ```
+
+## 📦 Practice Data
+
+Every assignment works against the fixtures in `RAG assets/`, so you never have to
+invent test data and results are comparable from one day to the next. Each
+assignment names the exact file it expects.
+
+| You need | Use |
+| --- | --- |
+| A short text file | `RAG assets/sample.txt` |
+| A multi-page PDF | `RAG assets/sample_rag_manual.pdf` |
+| A web page to scrape | `RAG assets/sample_article.html` |
+| A long document to chunk | `RAG assets/long_rag_corpus.md` |
+| A document corpus | `RAG assets/documents/` (61 files) |
+| Search queries | `RAG assets/test_queries.txt` |
+| Scoring retrieval | `RAG assets/evaluation_questions.json` |
+| Error-handling cases | `RAG assets/empty.txt`, `malformed.html`, `messy_text.txt` |
+
+`evaluation_questions.json` records which documents answer each question, so from
+Day 6 onwards you can measure retrieval instead of eyeballing it. The corpus also
+contains deliberate traps — a document stuffed with the word *chunk* that is
+actually about audio, and documents that answer a question without using its
+words — so the Day 9 comparisons of BM25 against semantic search show a real
+difference.
+
+The assets are generated. `RAG assets/_build/corpus.py` is the source and
+`build.py` writes the rest from it; `verify.py` checks them against what the
+assignments require:
+
+```bash
+python3 "RAG assets/_build/verify.py"    # 72 checks
+python3 "RAG assets/_build/build.py"     # regenerate, then verify
+```
+
+See `RAG assets/README.md` for the full description.
 
 ## 💡 Learning Tips
 

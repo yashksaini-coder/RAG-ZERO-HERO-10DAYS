@@ -148,7 +148,7 @@ Chunk1: [0-500] → Chunk2: [450-950] → Chunk3: [900-1400]
 ```python
 chunk_metadata = {
     "chunk_id": 1,
-    "source": "document.pdf",
+    "source": "../RAG assets/sample_rag_manual.pdf",
     "page": 3,
     "start_char": 0,
     "end_char": 500,
@@ -194,7 +194,7 @@ def extract_pdf_text(filepath):
         return None
 
 # Usage
-text = extract_pdf_text("document.pdf")
+text = extract_pdf_text("../RAG assets/sample_rag_manual.pdf")
 print(f"Extracted {len(text)} characters")
 ```
 
@@ -350,7 +350,7 @@ class DocumentProcessor:
 
 # Usage
 processor = DocumentProcessor(chunk_size=200, overlap=20)
-chunks = processor.process_pdf("document.pdf")
+chunks = processor.process_pdf("../RAG assets/sample_rag_manual.pdf")
 print(f"Processed {len(chunks)} chunks")
 ```
 

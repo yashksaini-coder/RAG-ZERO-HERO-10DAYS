@@ -26,7 +26,7 @@ Think of Python as your toolkit. Just like a carpenter needs to know how to use 
 **Lists** - Ordered collections of items
 
 ```python
-documents = ["doc1.txt", "doc2.txt", "doc3.txt"]
+documents = ["rag_intro.txt", "ret_bm25.txt", "chunk_fixed.txt"]
 chunks = []  # Empty list to store text chunks
 ```
 
@@ -34,9 +34,9 @@ chunks = []  # Empty list to store text chunks
 
 ```python
 document_info = {
-    "filename": "article.pdf",
+    "filename": "sample_rag_manual.pdf",
     "page_count": 10,
-    "author": "John Doe",
+    "author": "RAG 10 Days Practice Assets",
     "chunks": []
 }
 ```
@@ -58,7 +58,7 @@ File → Read → Process → Store
 **Reading text files:**
 
 ```python
-with open("document.txt", "r", encoding="utf-8") as file:
+with open("../RAG assets/sample.txt", "r", encoding="utf-8") as file:
     content = file.read()
 ```
 
@@ -165,7 +165,7 @@ def read_and_process_file(filename):
         return None
 
 # Usage
-result = read_and_process_file("sample.txt")
+result = read_and_process_file("../RAG assets/sample.txt")
 if result:
     print(f"Lines: {result['lines']}, Words: {result['words']}")
 ```
@@ -228,7 +228,7 @@ class Document:
         }
 
 # Usage
-doc = Document("article.txt", "This is the content of the article...")
+doc = Document("rag_intro.txt", "RAG puts a lookup step in front of a language model...")
 doc.add_chunk("First chunk", 1)
 doc.add_chunk("Second chunk", 2)
 print(doc.get_summary())

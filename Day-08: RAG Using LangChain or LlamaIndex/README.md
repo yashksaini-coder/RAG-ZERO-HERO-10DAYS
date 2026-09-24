@@ -127,7 +127,7 @@ import os
 os.environ["OPENAI_API_KEY"] = "your-key"
 
 # 1. Load documents
-loader = PyPDFLoader("document.pdf")
+loader = PyPDFLoader("../RAG assets/sample_rag_manual.pdf")
 documents = loader.load()
 
 # 2. Split text
