@@ -1,1 +1,9 @@
-<html><body><h1>Broken fixture<p>Missing closing tags
+<!doctype html>
+<html><body>
+<h1>Broken fixture
+<p>This document never closes its tags. A parser in strict mode fails here; a
+lenient parser recovers and returns this sentence.
+<div><span>Unclosed nesting
+<ul><li>First item<li>Second item
+<p>&amp; a stray entity: &nbsp; &notarealentity;
+</body>

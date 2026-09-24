@@ -1,21 +1,59 @@
 <!doctype html>
-<html>
-<head><title>Understanding Retrieval-Augmented Generation</title></head>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Understanding Retrieval-Augmented Generation | Practice Site</title>
+<meta name="author" content="Dana Practice">
+<meta name="description" content="A plain-language introduction to retrieval-augmented generation.">
+<meta property="article:published_time" content="2026-03-14T09:30:00Z">
+<meta property="og:title" content="Understanding Retrieval-Augmented Generation">
+<link rel="canonical" href="https://example.invalid/articles/understanding-rag">
+<style>nav { display: flex; } .ad { color: #999; }</style>
+</head>
 <body>
-<nav>Home | Docs | Pricing | Login</nav>
+<!-- Everything outside <article> is chrome and should not survive extraction. -->
+<header>
+<nav><a href="/">Home</a> | <a href="/docs">Docs</a> | <a href="/pricing">Pricing</a> | <a href="/login">Log in</a></nav>
+</header>
+<div class="ad">Sponsored: this advertisement must not appear in the extracted text.</div>
 <main>
 <article>
 <h1>Understanding Retrieval-Augmented Generation</h1>
-<p class="author">By Practice Author</p>
-<p class="date">2026-09-23</p>
-<p>RAG lets an application retrieve relevant information before asking a language model to generate an answer.</p>
-<p>The retrieval stage searches a collection of chunks. The generation stage receives the question and selected context.</p>
-<h2>Why retrieval matters</h2>
-<p>A language model can only use information available in its context. Retrieval gives the application a way to supply external knowledge.</p>
+<p class="byline">By <span class="author">Dana Practice</span> &middot;
+<time datetime="2026-03-14">14 March 2026</time> &middot; 6 min read</p>
+<p>Retrieval-augmented generation puts a lookup step in front of a language model. The question is used to find relevant passages in a collection, those passages are placed into the prompt, and the model is asked to answer from them.</p>
+<p>The point is to supply knowledge the model does not hold: material published after training, or private to an organisation, or too specific to have been memorised. The model supplies language ability while the collection supplies facts.</p>
+<h2>The two pipelines</h2>
+<p>A RAG system has two pipelines that run at different times. Indexing happens ahead of a question: documents are loaded, cleaned, split into passages, encoded, and written to a store together with their metadata.</p>
+<ul>
+<li>Load and clean the source material</li>
+<li>Split it into passages</li>
+<li>Encode the passages and store them with their metadata</li>
+</ul>
+<h2>What a query costs</h2>
+<table>
+<thead><tr><th>Stage</th><th>Typical latency</th></tr></thead>
+<tbody>
+<tr><td>Encode the question</td><td>20&ndash;60 ms</td></tr>
+<tr><td>Search the store</td><td>5&ndash;40 ms</td></tr>
+<tr><td>Generate the answer</td><td>1&ndash;6 s</td></tr>
+</tbody>
+</table>
+<h2>A minimal call</h2>
+<pre><code>hits = store.search(question, top_k=5)
+answer = generate(question, hits)</code></pre>
+<p>Further reading is collected on the <a href="/docs/retrieval">retrieval page</a>
+and in the <a href="https://example.invalid/papers">paper index</a>.</p>
 </article>
 </main>
-<aside>Advertisement: this should not appear in extracted article text.</aside>
-<footer>Copyright 2026 Practice Site</footer>
-<script>console.log("ignore me");</script>
+<aside class="related">
+<h3>Related</h3>
+<ul><li><a href="/articles/chunking">Chunking strategies</a></li>
+<li><a href="/articles/rerank">Reranking</a></li></ul>
+</aside>
+<footer>Copyright 2026 Practice Site &middot; <a href="/privacy">Privacy</a></footer>
+<script>console.log("analytics payload that must be stripped");</script>
+<noscript>Enable JavaScript for the interactive demo.</noscript>
 </body>
 </html>

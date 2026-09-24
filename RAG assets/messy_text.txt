@@ -1,6 +1,24 @@
-  RAG   uses   retrieval.
+RAG Practice Manual                                   Page 3 of 12
+
+   Retrieval   augmented   generation   combines  two   stages.
 
 
-This    line has   extra spaces.
-Visit https://example.com/test or email practice@example.com.
-Quotes: “hello” — dash test.
+
+This line has trailing spaces.      
+A word may be split across a line break as re-
+trieval, and must be rejoined before chunking.
+
+Smart punctuation: “quoted” ‘single’ — em dash – en dash… ellipsis.
+Mojibake from a double decode: itâ€™s here, and â€œquotedâ€ too.
+Control characters: bell and vertical tab and a null-ish  marker.
+Bullets: • first · second ▪ third
+Contact practice@example.invalid or see https://example.invalid/docs?q=rag&p=2
+Non-breaking spaces between words.
+
+RAG Practice Manual                                   Page 4 of 12
+
+Tabs	separate	these	columns.
+A line ending in a soft hyphen com-
+pletes on the next line.
+
+Copyright 2026 Practice Site. All rights reserved.
