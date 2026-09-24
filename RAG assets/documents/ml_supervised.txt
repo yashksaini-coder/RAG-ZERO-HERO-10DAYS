@@ -1,5 +1,15 @@
-Document: ml_supervised
+Supervised Learning
 
-Supervised machine learning learns from labeled examples such as input-output pairs.
+Supervised learning fits a model to pairs of inputs and known correct outputs. During
+training the model produces a prediction, a loss function scores how far that prediction
+sits from the recorded answer, and the parameters move in the direction that reduces the
+loss.
 
-This document is a small synthetic fixture for RAG retrieval experiments.
+The labelled examples are split into a training portion the model sees and a held-out
+portion it does not. Measuring accuracy on the held-out portion estimates how the model
+will behave on inputs it has never encountered, which is the only number that predicts
+production behaviour.
+
+Classification assigns each input to one of a fixed set of categories, while regression
+predicts a continuous quantity. The distinction determines both the loss function and the
+metrics that make sense for reporting results.

@@ -1,5 +1,12 @@
-Document: rag_citations
+Citations and Traceability
 
-A citation-aware RAG system stores source metadata alongside each chunk.
+A citation-bearing system keeps the identifier, source path, and position of every passage
+alongside its text, so that a sentence in the answer can be traced back to the exact place
+it came from.
 
-This document is a small synthetic fixture for RAG retrieval experiments.
+Labelling each passage in the prompt and instructing the model to cite those labels is the
+mechanism. The labels must be short and distinctive, since a model asked to reproduce a long
+path will sometimes alter it.
+
+Citations should be verified rather than trusted. Checking that each label the model emitted
+actually appears in the supplied set catches invented references before a user sees them.

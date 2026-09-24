@@ -1,0 +1,13 @@
+Serving a RAG System with FastAPI
+
+FastAPI derives request parsing, validation, and an OpenAPI description from Python type
+annotations. Declaring a model for the request body means malformed input is rejected with
+a clear message before any handler code runs.
+
+Expensive objects such as a loaded embedding model or an open collection belong in a
+lifespan handler that runs once at startup, not inside the request path. Rebuilding them
+per request turns a fast query into a slow one.
+
+Blocking calls inside an async handler stall the event loop and serialise every concurrent
+request. Either declare the handler with def so the framework runs it in a worker thread,
+or use an async client throughout.

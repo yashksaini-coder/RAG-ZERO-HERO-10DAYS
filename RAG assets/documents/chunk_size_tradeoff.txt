@@ -1,0 +1,12 @@
+Choosing a Chunk Size
+
+Small pieces produce sharp matches because a short passage is dominated by one idea, but
+they frequently omit the surrounding context a model needs to state a complete answer.
+
+Large pieces carry that context along, yet they dilute the match. A single relevant
+sentence buried in a thousand words pulls the vector toward the average of everything
+else in the piece, so the truly relevant item can rank below a shorter and vaguer one.
+
+The practical method is to fix the evaluation set first and sweep a few sizes, measuring
+whether the known correct source appears in the top results. The best size is a property
+of the corpus and the question style, not a universal constant.

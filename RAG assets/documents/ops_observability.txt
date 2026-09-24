@@ -1,0 +1,13 @@
+What to Log in a RAG System
+
+The useful record for one request contains the original question, any rewritten forms, the
+identifiers and scores of the passages returned, the number of tokens consumed, the latency
+of each stage, and the final answer.
+
+Stage timings separate a slow embedding call from a slow store from a slow generation,
+which is the first thing worth knowing when latency rises. A single total duration cannot
+distinguish them.
+
+Retrieval scores logged over time reveal drift. A gradual fall in the top score across many
+questions usually means the corpus has moved away from what users are asking, well before
+anyone reports a bad answer.

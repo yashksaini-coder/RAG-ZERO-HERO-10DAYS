@@ -1,0 +1,13 @@
+Configuration and Environments
+
+Settings that differ between a laptop and production belong outside the source: model
+names, chunk sizes, result counts, database paths, and log levels. Reading them from the
+environment with sensible defaults keeps one build usable everywhere.
+
+Validating configuration at startup and failing immediately on a missing or nonsensical
+value is better than discovering it on the first request. A chunk overlap larger than the
+chunk size should stop the process, not produce an infinite loop later.
+
+Recording the effective configuration in the startup log makes an incident investigation
+tractable, because the first question after unexpected behaviour is always which settings
+were actually in force.

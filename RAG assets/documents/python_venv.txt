@@ -1,0 +1,13 @@
+Virtual Environments and Dependencies
+
+A virtual environment is a directory holding its own interpreter symlink and its own
+site-packages tree. Activating one changes which interpreter the shell resolves, so
+packages installed afterwards land in the project rather than in the system installation.
+
+Recording exact versions in a requirements file makes an install reproducible. A loose
+specifier such as a package name alone will resolve to whatever the index serves that
+day, which is how a project that worked last month stops working today.
+
+Keeping the environment directory out of version control is standard, because it contains
+compiled artefacts specific to one operating system and interpreter build. The
+requirements file is the portable artefact that belongs in the repository instead.

@@ -1,0 +1,13 @@
+Overfitting and Generalisation
+
+A model overfits when it memorises noise particular to the training set instead of the
+pattern that generalises. The signature is a training score that keeps improving while
+the held-out score stalls or degrades.
+
+Remedies include gathering more examples, reducing model capacity, stopping training
+early when validation loss turns upward, and adding a penalty term that discourages large
+parameter values. Each trades a little training accuracy for stability on new inputs.
+
+Cross-validation gives a more reliable estimate than a single split by rotating which
+portion of the data is held out and averaging the scores. It costs more compute but
+reduces the chance that one lucky split flatters a weak model.

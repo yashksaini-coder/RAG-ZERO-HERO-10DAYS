@@ -1,5 +1,0 @@
-Document: security
-
-API keys should be stored in environment variables or a secret manager rather than source files.
-
-This document is a small synthetic fixture for RAG retrieval experiments.

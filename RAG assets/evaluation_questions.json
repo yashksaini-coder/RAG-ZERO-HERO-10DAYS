@@ -1,76 +1,1529 @@
-[
-  {
-    "question": "What does RAG combine?",
-    "answer": "retrieval and language generation",
-    "keywords": [
-      "retrieval",
-      "generation"
-    ],
-    "source": "rag_intro"
+{
+  "schema": {
+    "relevance_grades": "document id -> 2 (answers the question) or 1 (supporting context); unlisted documents are not relevant",
+    "kind": "simple | multi_source | vocabulary_mismatch | lexical_trap | unanswerable",
+    "answerable": "false means a correct system declines instead of answering"
   },
-  {
-    "question": "What is an embedding?",
-    "answer": "a numerical vector representation",
-    "keywords": [
-      "vector",
-      "representation"
-    ],
-    "source": "ml_embeddings"
-  },
-  {
-    "question": "What does BM25 provide?",
-    "answer": "lexical document ranking",
-    "keywords": [
-      "BM25",
-      "lexical",
-      "ranking"
-    ],
-    "source": "bm25"
-  },
-  {
-    "question": "Why store metadata in RAG?",
-    "answer": "to make results traceable and filterable",
-    "keywords": [
-      "metadata",
-      "traceable",
-      "filter"
-    ],
-    "source": "metadata"
-  },
-  {
-    "question": "What is sentence-aware chunking?",
-    "answer": "chunking that tries to preserve complete sentences",
-    "keywords": [
-      "sentence",
-      "chunking"
-    ],
-    "source": "chunk_sentence"
-  },
-  {
-    "question": "What does FastAPI provide?",
-    "answer": "typed HTTP endpoints and OpenAPI documentation",
-    "keywords": [
-      "HTTP",
-      "OpenAPI"
-    ],
-    "source": "fastapi"
-  },
-  {
-    "question": "What is hybrid retrieval?",
-    "answer": "a combination of lexical and semantic retrieval",
-    "keywords": [
-      "lexical",
-      "semantic"
-    ],
-    "source": "hybrid"
-  },
-  {
-    "question": "Why use a fixed evaluation set?",
-    "answer": "to make experiments repeatable",
-    "keywords": [
-      "evaluation",
-      "repeatable"
-    ],
-    "source": "evaluation"
-  }
-]
+  "questions": [
+    {
+      "id": "q01",
+      "question": "What is retrieval-augmented generation?",
+      "kind": "simple",
+      "reference_answer": "A technique that retrieves relevant passages from a collection and places them in the prompt so the model answers from supplied evidence rather than memory.",
+      "key_facts": [
+        "retrieve",
+        "passages",
+        "prompt"
+      ],
+      "relevant_ids": [
+        "doc-038",
+        "doc-039"
+      ],
+      "relevant_slugs": [
+        "rag_intro",
+        "rag_pipeline"
+      ],
+      "relevance_grades": {
+        "doc-038": 2,
+        "doc-039": 1
+      },
+      "answerable": true
+    },
+    {
+      "id": "q02",
+      "question": "How is a RAG system's indexing stage different from its query stage?",
+      "kind": "simple",
+      "reference_answer": "Indexing runs ahead of time as a batch job that loads, cleans, splits, encodes and stores documents; querying runs per request and must be fast.",
+      "key_facts": [
+        "indexing",
+        "query",
+        "batch"
+      ],
+      "relevant_ids": [
+        "doc-039",
+        "doc-038",
+        "doc-028"
+      ],
+      "relevant_slugs": [
+        "rag_pipeline",
+        "rag_intro",
+        "vdb_persistence"
+      ],
+      "relevance_grades": {
+        "doc-039": 2,
+        "doc-038": 1,
+        "doc-028": 1
+      },
+      "answerable": true
+    },
+    {
+      "id": "q03",
+      "question": "Why do all my documents look similar when I compare their embeddings?",
+      "kind": "simple",
+      "reference_answer": "Cosine scores are only meaningful relative to the model in use, and shared boilerplate text pulls every vector toward a common direction.",
+      "key_facts": [
+        "cosine",
+        "model",
+        "threshold"
+      ],
+      "relevant_ids": [
+        "doc-013",
+        "doc-012"
+      ],
+      "relevant_slugs": [
+        "emb_cosine",
+        "emb_what"
+      ],
+      "relevance_grades": {
+        "doc-013": 2,
+        "doc-012": 1
+      },
+      "answerable": true
+    },
+    {
+      "id": "q04",
+      "question": "Should I normalise vectors before computing cosine similarity?",
+      "kind": "simple",
+      "reference_answer": "Dividing each vector by its magnitude makes the dot product equal the cosine, which is faster; it fails on zero vectors produced by empty input.",
+      "key_facts": [
+        "unit",
+        "dot product",
+        "zero"
+      ],
+      "relevant_ids": [
+        "doc-014",
+        "doc-013"
+      ],
+      "relevant_slugs": [
+        "emb_normalization",
+        "emb_cosine"
+      ],
+      "relevance_grades": {
+        "doc-014": 2,
+        "doc-013": 1
+      },
+      "answerable": true
+    },
+    {
+      "id": "q05",
+      "question": "How should I split documents before embedding them?",
+      "kind": "multi_source",
+      "reference_answer": "Pick a strategy (fixed, sentence-aware or paragraph-aware), add ten to twenty percent overlap, and tune the size against an evaluation set.",
+      "key_facts": [
+        "overlap",
+        "sentence",
+        "size"
+      ],
+      "relevant_ids": [
+        "doc-018",
+        "doc-020",
+        "doc-019",
+        "doc-021",
+        "doc-022"
+      ],
+      "relevant_slugs": [
+        "chunk_fixed",
+        "chunk_paragraph",
+        "chunk_sentence",
+        "chunk_overlap",
+        "chunk_size_tradeoff"
+      ],
+      "relevance_grades": {
+        "doc-018": 2,
+        "doc-020": 2,
+        "doc-019": 2,
+        "doc-021": 1,
+        "doc-022": 1
+      },
+      "answerable": true
+    },
+    {
+      "id": "q06",
+      "question": "What chunk size should I use?",
+      "kind": "lexical_trap",
+      "reference_answer": "There is no universal value; sweep a few sizes against a labelled question set. Small pieces match sharply but lose context, large ones dilute the match.",
+      "key_facts": [
+        "sweep",
+        "context",
+        "dilute"
+      ],
+      "relevant_ids": [
+        "doc-022",
+        "doc-018",
+        "doc-021"
+      ],
+      "relevant_slugs": [
+        "chunk_size_tradeoff",
+        "chunk_fixed",
+        "chunk_overlap"
+      ],
+      "relevance_grades": {
+        "doc-022": 2,
+        "doc-018": 1,
+        "doc-021": 1
+      },
+      "answerable": true
+    },
+    {
+      "id": "q07",
+      "question": "How do I read a file one chunk at a time in Python?",
+      "kind": "lexical_trap",
+      "reference_answer": "Iterate over the file object for lines, or call read(size) for a bounded number of characters, so memory stays flat.",
+      "key_facts": [
+        "read",
+        "memory",
+        "stream"
+      ],
+      "relevant_ids": [
+        "doc-003",
+        "doc-023"
+      ],
+      "relevant_slugs": [
+        "python_files",
+        "audio_chunk_module"
+      ],
+      "relevance_grades": {
+        "doc-003": 2,
+        "doc-023": 1
+      },
+      "answerable": true
+    },
+    {
+      "id": "q08",
+      "question": "How large should an audio chunk be when reading a wave file?",
+      "kind": "simple",
+      "reference_answer": "A whole number of frames; multiply the frame count by sample width and channel count to get the byte length.",
+      "key_facts": [
+        "frames",
+        "sample width",
+        "channels"
+      ],
+      "relevant_ids": [
+        "doc-023"
+      ],
+      "relevant_slugs": [
+        "audio_chunk_module"
+      ],
+      "relevance_grades": {
+        "doc-023": 2
+      },
+      "answerable": true
+    },
+    {
+      "id": "q09",
+      "question": "Why does my chunking loop never finish?",
+      "kind": "simple",
+      "reference_answer": "The overlap is greater than or equal to the chunk size, so the window never advances.",
+      "key_facts": [
+        "overlap",
+        "chunk size",
+        "advance"
+      ],
+      "relevant_ids": [
+        "doc-021",
+        "doc-054"
+      ],
+      "relevant_slugs": [
+        "chunk_overlap",
+        "deploy_config"
+      ],
+      "relevance_grades": {
+        "doc-021": 2,
+        "doc-054": 1
+      },
+      "answerable": true
+    },
+    {
+      "id": "q10",
+      "question": "What is BM25 and when does it fail?",
+      "kind": "simple",
+      "reference_answer": "A lexical ranker that weights rare terms and corrects for length; it is blind to a question phrased entirely in synonyms.",
+      "key_facts": [
+        "rare terms",
+        "length",
+        "synonyms"
+      ],
+      "relevant_ids": [
+        "doc-029",
+        "doc-031",
+        "doc-030"
+      ],
+      "relevant_slugs": [
+        "ret_bm25",
+        "ret_semantic",
+        "ret_tfidf"
+      ],
+      "relevance_grades": {
+        "doc-029": 2,
+        "doc-031": 1,
+        "doc-030": 1
+      },
+      "answerable": true
+    },
+    {
+      "id": "q11",
+      "question": "What is the difference between lexical and semantic search?",
+      "kind": "multi_source",
+      "reference_answer": "Lexical matches surface forms and excels at exact strings; semantic compares meaning in vector space and handles paraphrase.",
+      "key_facts": [
+        "lexical",
+        "semantic",
+        "paraphrase"
+      ],
+      "relevant_ids": [
+        "doc-029",
+        "doc-031",
+        "doc-033"
+      ],
+      "relevant_slugs": [
+        "ret_bm25",
+        "ret_semantic",
+        "ret_hybrid"
+      ],
+      "relevance_grades": {
+        "doc-029": 2,
+        "doc-031": 2,
+        "doc-033": 1
+      },
+      "answerable": true
+    },
+    {
+      "id": "q12",
+      "question": "How do I combine keyword and vector search, and how do I pick the weight?",
+      "kind": "simple",
+      "reference_answer": "Normalise both result lists to a common range, blend with a weight, and sweep that weight on a labelled question set.",
+      "key_facts": [
+        "normalise",
+        "weight",
+        "sweep"
+      ],
+      "relevant_ids": [
+        "doc-033",
+        "doc-029",
+        "doc-034",
+        "doc-031"
+      ],
+      "relevant_slugs": [
+        "ret_hybrid",
+        "ret_bm25",
+        "ret_rrf",
+        "ret_semantic"
+      ],
+      "relevance_grades": {
+        "doc-033": 2,
+        "doc-029": 1,
+        "doc-034": 1,
+        "doc-031": 1
+      },
+      "answerable": true
+    },
+    {
+      "id": "q13",
+      "question": "How does reciprocal rank fusion work?",
+      "kind": "simple",
+      "reference_answer": "Each list contributes one over a constant plus the item's rank, summed per item; only positions are used so no score normalisation is needed.",
+      "key_facts": [
+        "rank",
+        "constant",
+        "sum"
+      ],
+      "relevant_ids": [
+        "doc-034",
+        "doc-033"
+      ],
+      "relevant_slugs": [
+        "ret_rrf",
+        "ret_hybrid"
+      ],
+      "relevance_grades": {
+        "doc-034": 2,
+        "doc-033": 1
+      },
+      "answerable": true
+    },
+    {
+      "id": "q14",
+      "question": "How can I improve the ordering of my retrieved results?",
+      "kind": "simple",
+      "reference_answer": "Over-fetch candidates cheaply, then score each query-passage pair with a cross-encoder and keep the best few.",
+      "key_facts": [
+        "cross-encoder",
+        "candidates",
+        "rerank"
+      ],
+      "relevant_ids": [
+        "doc-035",
+        "doc-032",
+        "doc-037"
+      ],
+      "relevant_slugs": [
+        "ret_rerank",
+        "evidence_selection",
+        "ret_topk"
+      ],
+      "relevance_grades": {
+        "doc-035": 2,
+        "doc-032": 1,
+        "doc-037": 1
+      },
+      "answerable": true
+    },
+    {
+      "id": "q15",
+      "question": "Why can't a reranker fix a passage that retrieval never returned?",
+      "kind": "simple",
+      "reference_answer": "Recall is fixed by the first stage; the reranker only reorders the candidates it is given.",
+      "key_facts": [
+        "recall",
+        "first stage",
+        "candidates"
+      ],
+      "relevant_ids": [
+        "doc-035",
+        "doc-046"
+      ],
+      "relevant_slugs": [
+        "ret_rerank",
+        "eval_retrieval_metrics"
+      ],
+      "relevance_grades": {
+        "doc-035": 2,
+        "doc-046": 1
+      },
+      "answerable": true
+    },
+    {
+      "id": "q16",
+      "question": "Why is a two-stage retrieval pipeline cheaper than scoring the whole index?",
+      "kind": "vocabulary_mismatch",
+      "reference_answer": "Narrow to a small candidate set with a cheap method first, then spend the expensive, more accurate method only on the survivors.",
+      "key_facts": [
+        "narrow",
+        "candidates",
+        "expensive"
+      ],
+      "relevant_ids": [
+        "doc-032",
+        "doc-035",
+        "doc-037",
+        "doc-026"
+      ],
+      "relevant_slugs": [
+        "evidence_selection",
+        "ret_rerank",
+        "ret_topk",
+        "vdb_hnsw"
+      ],
+      "relevance_grades": {
+        "doc-032": 2,
+        "doc-035": 2,
+        "doc-037": 1,
+        "doc-026": 1
+      },
+      "answerable": true
+    },
+    {
+      "id": "q17",
+      "question": "Why does the model make things up when it doesn't know?",
+      "kind": "vocabulary_mismatch",
+      "reference_answer": "Given no relevant passages it falls back on training patterns and fills the gap; instruct it to decline and verify each claim against the supplied passages.",
+      "key_facts": [
+        "decline",
+        "supported",
+        "verify"
+      ],
+      "relevant_ids": [
+        "doc-042",
+        "doc-041",
+        "doc-040"
+      ],
+      "relevant_slugs": [
+        "rag_grounding",
+        "rag_citations",
+        "rag_prompting"
+      ],
+      "relevance_grades": {
+        "doc-042": 2,
+        "doc-041": 1,
+        "doc-040": 1
+      },
+      "answerable": true
+    },
+    {
+      "id": "q18",
+      "question": "How do I generate alternative phrasings of a user's question?",
+      "kind": "simple",
+      "reference_answer": "Produce a paraphrase, a version in domain terminology, a keyword-only version and a hypothetical answer, then search each and merge.",
+      "key_facts": [
+        "paraphrase",
+        "variations",
+        "merge"
+      ],
+      "relevant_ids": [
+        "doc-044",
+        "doc-036"
+      ],
+      "relevant_slugs": [
+        "rag_multi_query",
+        "ret_query_rewrite"
+      ],
+      "relevance_grades": {
+        "doc-044": 2,
+        "doc-036": 2
+      },
+      "answerable": true
+    },
+    {
+      "id": "q19",
+      "question": "How do I deduplicate results when searching with several query variations?",
+      "kind": "simple",
+      "reference_answer": "Merge on the passage identifier and keep the best rank achieved across the formulations.",
+      "key_facts": [
+        "identifier",
+        "best rank",
+        "merge"
+      ],
+      "relevant_ids": [
+        "doc-044",
+        "doc-034"
+      ],
+      "relevant_slugs": [
+        "rag_multi_query",
+        "ret_rrf"
+      ],
+      "relevance_grades": {
+        "doc-044": 2,
+        "doc-034": 1
+      },
+      "answerable": true
+    },
+    {
+      "id": "q20",
+      "question": "How many passages should I pass to the model?",
+      "kind": "simple",
+      "reference_answer": "Three to five is a common operating point; over-fetch then filter by score or rerank rather than retrieving few directly.",
+      "key_facts": [
+        "three",
+        "five",
+        "filter"
+      ],
+      "relevant_ids": [
+        "doc-037",
+        "doc-043"
+      ],
+      "relevant_slugs": [
+        "ret_topk",
+        "rag_context_window"
+      ],
+      "relevance_grades": {
+        "doc-037": 2,
+        "doc-043": 1
+      },
+      "answerable": true
+    },
+    {
+      "id": "q21",
+      "question": "How do I stop the prompt from exceeding the context limit?",
+      "kind": "simple",
+      "reference_answer": "Reserve the output allowance first, divide the remainder among passages, and drop whole low-ranked passages rather than truncating every one.",
+      "key_facts": [
+        "reserve",
+        "budget",
+        "drop"
+      ],
+      "relevant_ids": [
+        "doc-043",
+        "doc-010",
+        "doc-037"
+      ],
+      "relevant_slugs": [
+        "rag_context_window",
+        "ml_tokenization",
+        "ret_topk"
+      ],
+      "relevance_grades": {
+        "doc-043": 2,
+        "doc-010": 1,
+        "doc-037": 1
+      },
+      "answerable": true
+    },
+    {
+      "id": "q22",
+      "question": "How do I count tokens to estimate cost?",
+      "kind": "simple",
+      "reference_answer": "Count with the same tokeniser the target model uses; token counts do not map cleanly onto word counts and providers bill per token.",
+      "key_facts": [
+        "tokeniser",
+        "billing",
+        "words"
+      ],
+      "relevant_ids": [
+        "doc-010",
+        "doc-043"
+      ],
+      "relevant_slugs": [
+        "ml_tokenization",
+        "rag_context_window"
+      ],
+      "relevance_grades": {
+        "doc-010": 2,
+        "doc-043": 1
+      },
+      "answerable": true
+    },
+    {
+      "id": "q23",
+      "question": "How do I make a RAG answer cite its sources?",
+      "kind": "simple",
+      "reference_answer": "Keep identifier, path and position with each passage, label them in the prompt, instruct the model to cite the labels, and verify the labels it emitted.",
+      "key_facts": [
+        "label",
+        "instruct",
+        "verify"
+      ],
+      "relevant_ids": [
+        "doc-041",
+        "doc-040",
+        "doc-027"
+      ],
+      "relevant_slugs": [
+        "rag_citations",
+        "rag_prompting",
+        "vdb_filtering"
+      ],
+      "relevance_grades": {
+        "doc-041": 2,
+        "doc-040": 1,
+        "doc-027": 1
+      },
+      "answerable": true
+    },
+    {
+      "id": "q24",
+      "question": "What should the instruction in an augmented prompt say?",
+      "kind": "simple",
+      "reference_answer": "State that the answer must come from the supplied passages and that the model should say it does not know when they do not contain one.",
+      "key_facts": [
+        "supplied passages",
+        "do not know",
+        "delimiters"
+      ],
+      "relevant_ids": [
+        "doc-040",
+        "doc-041",
+        "doc-042"
+      ],
+      "relevant_slugs": [
+        "rag_prompting",
+        "rag_citations",
+        "rag_grounding"
+      ],
+      "relevance_grades": {
+        "doc-040": 2,
+        "doc-041": 1,
+        "doc-042": 1
+      },
+      "answerable": true
+    },
+    {
+      "id": "q25",
+      "question": "Can a retrieved document contain instructions that hijack the model?",
+      "kind": "simple",
+      "reference_answer": "Yes. Retrieved text joins the prompt, so mark it as untrusted data, state it must not be obeyed, and limit what the system can do.",
+      "key_facts": [
+        "untrusted",
+        "delimiters",
+        "limit"
+      ],
+      "relevant_ids": [
+        "doc-056",
+        "doc-040"
+      ],
+      "relevant_slugs": [
+        "sec_prompt_injection",
+        "rag_prompting"
+      ],
+      "relevance_grades": {
+        "doc-056": 2,
+        "doc-040": 1
+      },
+      "answerable": true
+    },
+    {
+      "id": "q26",
+      "question": "How should API keys be handled in a deployed application?",
+      "kind": "simple",
+      "reference_answer": "Load them from environment variables or a managed secret store, never commit them, and redact them from logs.",
+      "key_facts": [
+        "environment",
+        "secret store",
+        "redact"
+      ],
+      "relevant_ids": [
+        "doc-055",
+        "doc-054"
+      ],
+      "relevant_slugs": [
+        "sec_api_keys",
+        "deploy_config"
+      ],
+      "relevance_grades": {
+        "doc-055": 2,
+        "doc-054": 1
+      },
+      "answerable": true
+    },
+    {
+      "id": "q27",
+      "question": "What metadata should I store alongside each passage?",
+      "kind": "multi_source",
+      "reference_answer": "Source, section, position and identifier, kept as flat scalars so the store can filter on them before comparing similarity.",
+      "key_facts": [
+        "source",
+        "scalars",
+        "filter"
+      ],
+      "relevant_ids": [
+        "doc-027",
+        "doc-041",
+        "doc-025"
+      ],
+      "relevant_slugs": [
+        "vdb_filtering",
+        "rag_citations",
+        "vdb_chromadb"
+      ],
+      "relevance_grades": {
+        "doc-027": 2,
+        "doc-041": 1,
+        "doc-025": 1
+      },
+      "answerable": true
+    },
+    {
+      "id": "q28",
+      "question": "Why does my filtered search return nothing?",
+      "kind": "simple",
+      "reference_answer": "The metadata clause matched no items; report how many survived the filter to separate 'nothing relevant' from 'nothing eligible'.",
+      "key_facts": [
+        "filter",
+        "empty",
+        "eligible"
+      ],
+      "relevant_ids": [
+        "doc-027",
+        "doc-025"
+      ],
+      "relevant_slugs": [
+        "vdb_filtering",
+        "vdb_chromadb"
+      ],
+      "relevance_grades": {
+        "doc-027": 2,
+        "doc-025": 1
+      },
+      "answerable": true
+    },
+    {
+      "id": "q29",
+      "question": "How do I make a Chroma collection survive a restart?",
+      "kind": "simple",
+      "reference_answer": "Create the client with a persistence path so the collection is written to disk.",
+      "key_facts": [
+        "persist",
+        "path",
+        "restart"
+      ],
+      "relevant_ids": [
+        "doc-025",
+        "doc-028"
+      ],
+      "relevant_slugs": [
+        "vdb_chromadb",
+        "vdb_persistence"
+      ],
+      "relevance_grades": {
+        "doc-025": 2,
+        "doc-028": 2
+      },
+      "answerable": true
+    },
+    {
+      "id": "q30",
+      "question": "Do I have to re-index when I change embedding model?",
+      "kind": "simple",
+      "reference_answer": "Yes; vectors from different models are not comparable, so the whole collection must be re-encoded.",
+      "key_facts": [
+        "re-index",
+        "not comparable",
+        "model"
+      ],
+      "relevant_ids": [
+        "doc-015",
+        "doc-028",
+        "doc-017"
+      ],
+      "relevant_slugs": [
+        "emb_dimensions",
+        "vdb_persistence",
+        "emb_models"
+      ],
+      "relevance_grades": {
+        "doc-015": 2,
+        "doc-028": 2,
+        "doc-017": 1
+      },
+      "answerable": true
+    },
+    {
+      "id": "q31",
+      "question": "How does an approximate nearest neighbour index avoid comparing everything?",
+      "kind": "simple",
+      "reference_answer": "It walks layers of linked neighbours greedily toward the query, examining only a small fraction of the collection.",
+      "key_facts": [
+        "layers",
+        "greedy",
+        "approximate"
+      ],
+      "relevant_ids": [
+        "doc-026",
+        "doc-024"
+      ],
+      "relevant_slugs": [
+        "vdb_hnsw",
+        "vdb_concepts"
+      ],
+      "relevance_grades": {
+        "doc-026": 2,
+        "doc-024": 1
+      },
+      "answerable": true
+    },
+    {
+      "id": "q32",
+      "question": "How do I measure whether my retrieval is any good?",
+      "kind": "multi_source",
+      "reference_answer": "Recall@k tells you whether the correct source was found at all; a rank-sensitive measure such as MRR tells you whether it was placed early.",
+      "key_facts": [
+        "recall",
+        "MRR",
+        "labels"
+      ],
+      "relevant_ids": [
+        "doc-048",
+        "doc-046",
+        "doc-047"
+      ],
+      "relevant_slugs": [
+        "eval_dataset_design",
+        "eval_retrieval_metrics",
+        "eval_answer_quality"
+      ],
+      "relevance_grades": {
+        "doc-048": 2,
+        "doc-046": 2,
+        "doc-047": 1
+      },
+      "answerable": true
+    },
+    {
+      "id": "q33",
+      "question": "How many questions do I need in an evaluation set, and what should they cover?",
+      "kind": "simple",
+      "reference_answer": "Thirty to fifty spanning simple lookups, multi-source questions, unusual phrasings, and questions the collection cannot answer.",
+      "key_facts": [
+        "thirty",
+        "unanswerable",
+        "coverage"
+      ],
+      "relevant_ids": [
+        "doc-048",
+        "doc-049"
+      ],
+      "relevant_slugs": [
+        "eval_dataset_design",
+        "eval_ab_testing"
+      ],
+      "relevance_grades": {
+        "doc-048": 2,
+        "doc-049": 1
+      },
+      "answerable": true
+    },
+    {
+      "id": "q34",
+      "question": "How do I tell whether a change to my pipeline actually helped?",
+      "kind": "simple",
+      "reference_answer": "Vary one factor at a time on the same questions and metric, seed any randomness, and report per-question outcomes alongside the aggregate.",
+      "key_facts": [
+        "one factor",
+        "same questions",
+        "per-question"
+      ],
+      "relevant_ids": [
+        "doc-049",
+        "doc-046"
+      ],
+      "relevant_slugs": [
+        "eval_ab_testing",
+        "eval_retrieval_metrics"
+      ],
+      "relevance_grades": {
+        "doc-049": 2,
+        "doc-046": 1
+      },
+      "answerable": true
+    },
+    {
+      "id": "q35",
+      "question": "How do I judge whether an answer is correct without exact string matching?",
+      "kind": "simple",
+      "reference_answer": "Check for required key facts, or use a model as judge while auditing a sample by hand.",
+      "key_facts": [
+        "key facts",
+        "judge",
+        "audit"
+      ],
+      "relevant_ids": [
+        "doc-047",
+        "doc-048"
+      ],
+      "relevant_slugs": [
+        "eval_answer_quality",
+        "eval_dataset_design"
+      ],
+      "relevance_grades": {
+        "doc-047": 2,
+        "doc-048": 1
+      },
+      "answerable": true
+    },
+    {
+      "id": "q36",
+      "question": "How can I expose a RAG system through an HTTP API?",
+      "kind": "simple",
+      "reference_answer": "Declare request models for validation, load expensive objects once in a lifespan handler, and keep blocking calls off the event loop.",
+      "key_facts": [
+        "lifespan",
+        "validation",
+        "blocking"
+      ],
+      "relevant_ids": [
+        "doc-050",
+        "doc-051",
+        "doc-053"
+      ],
+      "relevant_slugs": [
+        "api_fastapi",
+        "api_streaming",
+        "deploy_docker"
+      ],
+      "relevance_grades": {
+        "doc-050": 2,
+        "doc-051": 1,
+        "doc-053": 1
+      },
+      "answerable": true
+    },
+    {
+      "id": "q37",
+      "question": "How do I show the answer while it is still being generated?",
+      "kind": "simple",
+      "reference_answer": "Stream tokens over server-sent events; errors after the first byte must be carried as an event since the status code is already sent.",
+      "key_facts": [
+        "stream",
+        "server-sent events",
+        "error"
+      ],
+      "relevant_ids": [
+        "doc-051",
+        "doc-050"
+      ],
+      "relevant_slugs": [
+        "api_streaming",
+        "api_fastapi"
+      ],
+      "relevance_grades": {
+        "doc-051": 2,
+        "doc-050": 1
+      },
+      "answerable": true
+    },
+    {
+      "id": "q38",
+      "question": "Why does my Streamlit chat history disappear?",
+      "kind": "simple",
+      "reference_answer": "The script re-runs on every interaction, so values must be kept in session state rather than local variables.",
+      "key_facts": [
+        "re-run",
+        "session state",
+        "cache"
+      ],
+      "relevant_ids": [
+        "doc-052"
+      ],
+      "relevant_slugs": [
+        "ui_streamlit"
+      ],
+      "relevance_grades": {
+        "doc-052": 2
+      },
+      "answerable": true
+    },
+    {
+      "id": "q39",
+      "question": "How should I containerise this application?",
+      "kind": "simple",
+      "reference_answer": "Pin the base image, install requirements before copying source so the layer cache works, and mount model and vector data rather than baking it in.",
+      "key_facts": [
+        "pin",
+        "layer cache",
+        "mount"
+      ],
+      "relevant_ids": [
+        "doc-053",
+        "doc-054"
+      ],
+      "relevant_slugs": [
+        "deploy_docker",
+        "deploy_config"
+      ],
+      "relevance_grades": {
+        "doc-053": 2,
+        "doc-054": 1
+      },
+      "answerable": true
+    },
+    {
+      "id": "q40",
+      "question": "What should I log for each request?",
+      "kind": "simple",
+      "reference_answer": "Question, rewrites, passage identifiers and scores, token usage, per-stage latency and the final answer.",
+      "key_facts": [
+        "scores",
+        "latency",
+        "tokens"
+      ],
+      "relevant_ids": [
+        "doc-057",
+        "doc-058"
+      ],
+      "relevant_slugs": [
+        "ops_observability",
+        "ops_caching"
+      ],
+      "relevance_grades": {
+        "doc-057": 2,
+        "doc-058": 1
+      },
+      "answerable": true
+    },
+    {
+      "id": "q41",
+      "question": "What should I cache in a RAG system?",
+      "kind": "simple",
+      "reference_answer": "Embeddings keyed on a hash of the text, retrieval results per normalised question, and completions with care.",
+      "key_facts": [
+        "embeddings",
+        "hash",
+        "invalidate"
+      ],
+      "relevant_ids": [
+        "doc-058",
+        "doc-016"
+      ],
+      "relevant_slugs": [
+        "ops_caching",
+        "emb_batching"
+      ],
+      "relevance_grades": {
+        "doc-058": 2,
+        "doc-016": 1
+      },
+      "answerable": true
+    },
+    {
+      "id": "q42",
+      "question": "How should I handle being rate limited by the provider?",
+      "kind": "simple",
+      "reference_answer": "Retry with exponential backoff and jitter up to a capped number of attempts, and never retry a malformed request.",
+      "key_facts": [
+        "backoff",
+        "jitter",
+        "retryable"
+      ],
+      "relevant_ids": [
+        "doc-059",
+        "doc-016"
+      ],
+      "relevant_slugs": [
+        "ops_rate_limits",
+        "emb_batching"
+      ],
+      "relevance_grades": {
+        "doc-059": 2,
+        "doc-016": 1
+      },
+      "answerable": true
+    },
+    {
+      "id": "q43",
+      "question": "How do I embed a large number of documents efficiently?",
+      "kind": "simple",
+      "reference_answer": "Send batches in one call, split on a running token count, and retry failures with backoff while recording what already succeeded.",
+      "key_facts": [
+        "batch",
+        "token count",
+        "retry"
+      ],
+      "relevant_ids": [
+        "doc-016",
+        "doc-059"
+      ],
+      "relevant_slugs": [
+        "emb_batching",
+        "ops_rate_limits"
+      ],
+      "relevance_grades": {
+        "doc-016": 2,
+        "doc-059": 1
+      },
+      "answerable": true
+    },
+    {
+      "id": "q44",
+      "question": "Should I use a hosted or a local embedding model?",
+      "kind": "simple",
+      "reference_answer": "Hosted costs per call and needs a key; local is free per call and private but needs setup and memory. Decide with a small labelled set from your own corpus.",
+      "key_facts": [
+        "hosted",
+        "local",
+        "labelled set"
+      ],
+      "relevant_ids": [
+        "doc-017",
+        "doc-015",
+        "doc-055"
+      ],
+      "relevant_slugs": [
+        "emb_models",
+        "emb_dimensions",
+        "sec_api_keys"
+      ],
+      "relevance_grades": {
+        "doc-017": 2,
+        "doc-015": 1,
+        "doc-055": 1
+      },
+      "answerable": true
+    },
+    {
+      "id": "q45",
+      "question": "Is RAG the right approach for counting how many records match a condition?",
+      "kind": "simple",
+      "reference_answer": "No. Only a handful of passages are consulted, so aggregation over an entire collection belongs in a database query.",
+      "key_facts": [
+        "aggregate",
+        "database",
+        "not suited"
+      ],
+      "relevant_ids": [
+        "doc-045",
+        "doc-037"
+      ],
+      "relevant_slugs": [
+        "rag_when_not",
+        "ret_topk"
+      ],
+      "relevance_grades": {
+        "doc-045": 2,
+        "doc-037": 1
+      },
+      "answerable": true
+    },
+    {
+      "id": "q46",
+      "question": "What does an embedding actually represent?",
+      "kind": "simple",
+      "reference_answer": "A fixed-length vector whose geometric relationship to other vectors encodes similarity of meaning; individual coordinates are not interpretable.",
+      "key_facts": [
+        "fixed-length",
+        "vector",
+        "similarity"
+      ],
+      "relevant_ids": [
+        "doc-012",
+        "doc-013"
+      ],
+      "relevant_slugs": [
+        "emb_what",
+        "emb_cosine"
+      ],
+      "relevance_grades": {
+        "doc-012": 2,
+        "doc-013": 1
+      },
+      "answerable": true
+    },
+    {
+      "id": "q47",
+      "question": "What does a vector database give me over a plain list of vectors?",
+      "kind": "simple",
+      "reference_answer": "It stores text and metadata alongside the vectors and answers nearest-neighbour queries without comparing against every row.",
+      "key_facts": [
+        "metadata",
+        "nearest neighbour",
+        "scale"
+      ],
+      "relevant_ids": [
+        "doc-024",
+        "doc-025",
+        "doc-026"
+      ],
+      "relevant_slugs": [
+        "vdb_concepts",
+        "vdb_chromadb",
+        "vdb_hnsw"
+      ],
+      "relevance_grades": {
+        "doc-024": 2,
+        "doc-025": 1,
+        "doc-026": 1
+      },
+      "answerable": true
+    },
+    {
+      "id": "q48",
+      "question": "Why does mutating a default list argument cause bugs?",
+      "kind": "simple",
+      "reference_answer": "Defaults are evaluated once at definition time, so one shared object accumulates state between calls; default to None instead.",
+      "key_facts": [
+        "evaluated once",
+        "shared",
+        "None"
+      ],
+      "relevant_ids": [
+        "doc-002",
+        "doc-004"
+      ],
+      "relevant_slugs": [
+        "python_functions",
+        "python_dataclasses"
+      ],
+      "relevance_grades": {
+        "doc-002": 2,
+        "doc-004": 1
+      },
+      "answerable": true
+    },
+    {
+      "id": "q49",
+      "question": "How do I stop garbled characters appearing in extracted text?",
+      "kind": "simple",
+      "reference_answer": "Pass encoding='utf-8' explicitly rather than relying on the platform default.",
+      "key_facts": [
+        "utf-8",
+        "encoding",
+        "platform"
+      ],
+      "relevant_ids": [
+        "doc-003",
+        "doc-006"
+      ],
+      "relevant_slugs": [
+        "python_files",
+        "python_venv"
+      ],
+      "relevance_grades": {
+        "doc-003": 2,
+        "doc-006": 1
+      },
+      "answerable": true
+    },
+    {
+      "id": "q50",
+      "question": "What is the cleanest way to define a record type that holds named fields?",
+      "kind": "simple",
+      "reference_answer": "A dataclass, using default_factory for mutable defaults and frozen=True when the instance must be hashable.",
+      "key_facts": [
+        "dataclass",
+        "default_factory",
+        "frozen"
+      ],
+      "relevant_ids": [
+        "doc-004",
+        "doc-002"
+      ],
+      "relevant_slugs": [
+        "python_dataclasses",
+        "python_functions"
+      ],
+      "relevance_grades": {
+        "doc-004": 2,
+        "doc-002": 1
+      },
+      "answerable": true
+    },
+    {
+      "id": "q51",
+      "question": "How should I structure try and except blocks?",
+      "kind": "simple",
+      "reference_answer": "Wrap the smallest failing region, name the specific exception, use else for the success path and finally for cleanup, and re-raise bare to keep the traceback.",
+      "key_facts": [
+        "specific",
+        "finally",
+        "traceback"
+      ],
+      "relevant_ids": [
+        "doc-005",
+        "doc-059"
+      ],
+      "relevant_slugs": [
+        "python_errors",
+        "ops_rate_limits"
+      ],
+      "relevance_grades": {
+        "doc-005": 2,
+        "doc-059": 1
+      },
+      "answerable": true
+    },
+    {
+      "id": "q52",
+      "question": "Why should each project get its own virtual environment?",
+      "kind": "simple",
+      "reference_answer": "It isolates installed packages from the system interpreter; pinned requirements make the install reproducible.",
+      "key_facts": [
+        "isolate",
+        "pinned",
+        "reproducible"
+      ],
+      "relevant_ids": [
+        "doc-006",
+        "doc-053"
+      ],
+      "relevant_slugs": [
+        "python_venv",
+        "deploy_docker"
+      ],
+      "relevance_grades": {
+        "doc-006": 2,
+        "doc-053": 1
+      },
+      "answerable": true
+    },
+    {
+      "id": "q53",
+      "question": "Why does indentation matter in Python?",
+      "kind": "simple",
+      "reference_answer": "Indentation is syntax: it marks the body of a block, and mixing tabs with spaces raises a TabError.",
+      "key_facts": [
+        "indentation",
+        "block",
+        "syntax"
+      ],
+      "relevant_ids": [
+        "doc-001"
+      ],
+      "relevant_slugs": [
+        "python_basics"
+      ],
+      "relevance_grades": {
+        "doc-001": 2
+      },
+      "answerable": true
+    },
+    {
+      "id": "q54",
+      "question": "What is the difference between learning from labelled and unlabelled data?",
+      "kind": "multi_source",
+      "reference_answer": "Supervised learning fits input-output pairs against a recorded answer; unsupervised learning optimises an objective defined only over the inputs.",
+      "key_facts": [
+        "labelled",
+        "unlabelled",
+        "structure"
+      ],
+      "relevant_ids": [
+        "doc-007",
+        "doc-008"
+      ],
+      "relevant_slugs": [
+        "ml_supervised",
+        "ml_unsupervised"
+      ],
+      "relevance_grades": {
+        "doc-007": 2,
+        "doc-008": 2
+      },
+      "answerable": true
+    },
+    {
+      "id": "q55",
+      "question": "My training score keeps improving but my test score doesn't. What is happening?",
+      "kind": "simple",
+      "reference_answer": "The model is overfitting: it is memorising noise specific to the training set.",
+      "key_facts": [
+        "overfit",
+        "held-out",
+        "early stopping"
+      ],
+      "relevant_ids": [
+        "doc-009",
+        "doc-007"
+      ],
+      "relevant_slugs": [
+        "ml_overfitting",
+        "ml_supervised"
+      ],
+      "relevance_grades": {
+        "doc-009": 2,
+        "doc-007": 1
+      },
+      "answerable": true
+    },
+    {
+      "id": "q56",
+      "question": "Why is attention expensive on long inputs?",
+      "kind": "simple",
+      "reference_answer": "Attention compares every pair of positions, so cost grows with the square of sequence length.",
+      "key_facts": [
+        "quadratic",
+        "pairs",
+        "context window"
+      ],
+      "relevant_ids": [
+        "doc-011",
+        "doc-010"
+      ],
+      "relevant_slugs": [
+        "ml_transformers",
+        "ml_tokenization"
+      ],
+      "relevance_grades": {
+        "doc-011": 2,
+        "doc-010": 1
+      },
+      "answerable": true
+    },
+    {
+      "id": "q57",
+      "question": "Why is TF-IDF high for some words and not others?",
+      "kind": "simple",
+      "reference_answer": "The weight is high for a term frequent in this document and rare across the collection.",
+      "key_facts": [
+        "frequent",
+        "rare",
+        "weight"
+      ],
+      "relevant_ids": [
+        "doc-030",
+        "doc-029"
+      ],
+      "relevant_slugs": [
+        "ret_tfidf",
+        "ret_bm25"
+      ],
+      "relevance_grades": {
+        "doc-030": 2,
+        "doc-029": 1
+      },
+      "answerable": true
+    },
+    {
+      "id": "q58",
+      "question": "How do I keep my chunks from cutting sentences in half?",
+      "kind": "simple",
+      "reference_answer": "Use sentence-aware chunking, accumulating whole sentences until the next one would exceed the target size.",
+      "key_facts": [
+        "sentence",
+        "boundary",
+        "accumulate"
+      ],
+      "relevant_ids": [
+        "doc-019",
+        "doc-018",
+        "doc-020"
+      ],
+      "relevant_slugs": [
+        "chunk_sentence",
+        "chunk_fixed",
+        "chunk_paragraph"
+      ],
+      "relevance_grades": {
+        "doc-019": 2,
+        "doc-018": 1,
+        "doc-020": 1
+      },
+      "answerable": true
+    },
+    {
+      "id": "q59",
+      "question": "Where should chunk size and result count be configured?",
+      "kind": "simple",
+      "reference_answer": "Outside the source, read from the environment with defaults, and validated at startup so a bad value fails immediately.",
+      "key_facts": [
+        "environment",
+        "defaults",
+        "validate"
+      ],
+      "relevant_ids": [
+        "doc-054",
+        "doc-057"
+      ],
+      "relevant_slugs": [
+        "deploy_config",
+        "ops_observability"
+      ],
+      "relevance_grades": {
+        "doc-054": 2,
+        "doc-057": 1
+      },
+      "answerable": true
+    },
+    {
+      "id": "q60",
+      "question": "What were this company's quarterly earnings last year?",
+      "kind": "unanswerable",
+      "reference_answer": "Not answerable from this collection.",
+      "key_facts": [],
+      "relevant_ids": [],
+      "relevant_slugs": [],
+      "relevance_grades": {},
+      "answerable": false
+    },
+    {
+      "id": "q61",
+      "question": "How do I get a mortgage pre-approval in Ireland?",
+      "kind": "unanswerable",
+      "reference_answer": "Not answerable from this collection.",
+      "key_facts": [],
+      "relevant_ids": [],
+      "relevant_slugs": [],
+      "relevance_grades": {},
+      "answerable": false
+    },
+    {
+      "id": "q62",
+      "question": "Which Kubernetes ingress controller should I choose?",
+      "kind": "unanswerable",
+      "reference_answer": "Not answerable from this collection.",
+      "key_facts": [],
+      "relevant_ids": [],
+      "relevant_slugs": [],
+      "relevance_grades": {},
+      "answerable": false
+    },
+    {
+      "id": "q63",
+      "question": "How long should I bake sourdough and at what temperature?",
+      "kind": "unanswerable",
+      "reference_answer": "Not answerable from this collection; the starter document does not cover baking.",
+      "key_facts": [],
+      "relevant_ids": [],
+      "relevant_slugs": [],
+      "relevance_grades": {},
+      "answerable": false
+    }
+  ]
+}

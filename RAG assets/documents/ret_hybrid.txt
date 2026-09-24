@@ -1,0 +1,13 @@
+Hybrid Search
+
+Hybrid search runs a term-based ranker and a vector ranker over the same collection and
+merges their outputs. Each compensates for the other's blind spot: exact strings come from
+the term side, paraphrase from the vector side.
+
+A weighted blend needs the two score scales reconciled, because a BM25 score is unbounded
+while a cosine value sits near one. Normalising each result list to a common range before
+applying the weight is the usual fix.
+
+The weight is a tunable parameter. Sweeping it from purely lexical to purely semantic on a
+labelled question set and plotting the metric shows where the corpus sits; identifier-heavy
+material favours the lexical end, conversational material the semantic end.

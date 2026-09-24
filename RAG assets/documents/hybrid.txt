@@ -1,5 +1,0 @@
-Document: hybrid
-
-Hybrid retrieval combines lexical and semantic retrieval signals.
-
-This document is a small synthetic fixture for RAG retrieval experiments.

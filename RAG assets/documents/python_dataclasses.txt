@@ -1,0 +1,14 @@
+Structuring Records with Dataclasses
+
+The dataclass decorator generates an initialiser, a readable repr, and equality
+comparison from a set of annotated attributes. It replaces the boilerplate that would
+otherwise be written by hand for a class whose job is simply to hold named fields.
+
+Mutable attribute defaults must be declared through field(default_factory=list) rather
+than assigned directly, mirroring the rule for mutable function defaults. Passing
+frozen=True makes instances immutable and hashable, which allows them to be used as
+dictionary keys or set members.
+
+For a pipeline that carries a record through several stages, a dataclass documents the
+shape of that record in one place. Converting to a plain dictionary with asdict makes the
+same object easy to serialise to JSON at the boundary of the program.

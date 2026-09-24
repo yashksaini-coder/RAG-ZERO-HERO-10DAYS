@@ -1,0 +1,13 @@
+Reading Audio Chunks with the wave Module
+
+The wave module in the standard library reads and writes uncompressed audio files. Calling
+readframes returns a chunk of raw sample data as a bytes object, and repeated calls walk
+through the file one chunk at a time until the frames are exhausted.
+
+Choosing a chunk size is a buffering decision. A small chunk keeps memory use low and
+latency short for streaming playback, while a larger chunk reduces the number of system
+calls when the goal is simply to convert a file as fast as possible.
+
+Every chunk must be a whole number of frames, because a frame holds one sample for each
+channel and splitting inside one corrupts the waveform. Multiplying the desired frame
+count by the sample width and the channel count gives the correct chunk length in bytes.

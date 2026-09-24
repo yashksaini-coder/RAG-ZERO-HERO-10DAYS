@@ -1,5 +1,0 @@
-Document: fastapi
-
-FastAPI provides typed HTTP endpoints and automatic OpenAPI documentation.
-
-This document is a small synthetic fixture for RAG retrieval experiments.

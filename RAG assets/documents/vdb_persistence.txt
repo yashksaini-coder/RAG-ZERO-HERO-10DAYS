@@ -1,0 +1,14 @@
+Persistence and Re-indexing
+
+An in-memory store disappears when the process ends, which is convenient for tests and
+wrong for anything else. Pointing the client at a directory makes the collection durable
+across restarts and lets a separate process read the same data.
+
+Re-indexing is required whenever the embedding model changes, because vectors produced by
+different models are not comparable. Recording the model name and the chunking settings
+alongside the collection makes the mismatch detectable instead of silently degrading
+results.
+
+Deriving each identifier from the source path and the piece index means re-running the
+indexer over an edited file replaces exactly the affected entries, rather than appending a
+second copy of the document.

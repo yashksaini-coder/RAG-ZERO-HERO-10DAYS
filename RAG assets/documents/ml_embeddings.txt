@@ -1,5 +1,0 @@
-Document: ml_embeddings
-
-Embedding models transform text into vectors that can be compared for semantic similarity.
-
-This document is a small synthetic fixture for RAG retrieval experiments.

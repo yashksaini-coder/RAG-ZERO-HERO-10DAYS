@@ -1,5 +1,0 @@
-Document: rag_query
-
-Query rewriting generates alternate formulations to improve retrieval coverage.
-
-This document is a small synthetic fixture for RAG retrieval experiments.

@@ -1,0 +1,14 @@
+Reading and Writing Files Safely
+
+Opening a file inside a with-statement guarantees the handle is closed when the block
+exits, including when an exception propagates out of it. Forgetting to close handles in a
+long-running process eventually exhausts the operating system's file descriptor limit.
+
+Text mode decodes bytes using an encoding that defaults to the platform's preference,
+which differs between machines. Passing encoding="utf-8" explicitly makes a program
+behave identically on Linux, macOS, and Windows, and is the single most effective guard
+against mojibake in a text pipeline.
+
+Very large files should be streamed rather than loaded whole. Iterating over a file
+object yields one line at a time, and read(size) returns a bounded number of characters,
+so peak memory stays flat no matter how big the input grows.

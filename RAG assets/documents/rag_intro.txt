@@ -1,5 +1,12 @@
-Document: rag_intro
+What Retrieval-Augmented Generation Is
 
-RAG retrieves relevant documents and gives them to a language model as context.
+Retrieval-augmented generation puts a lookup step in front of a language model. The
+question is used to find relevant passages in a collection, those passages are placed into
+the prompt, and the model is asked to answer from them.
 
-This document is a small synthetic fixture for RAG retrieval experiments.
+The point is to supply knowledge the model does not hold: material published after
+training, or private to an organisation, or too specific to have been memorised. The model
+supplies language ability while the collection supplies facts.
+
+Compared with fine-tuning, the knowledge stays editable. Correcting an error means editing
+a document and re-indexing it, rather than assembling a dataset and running a training job.

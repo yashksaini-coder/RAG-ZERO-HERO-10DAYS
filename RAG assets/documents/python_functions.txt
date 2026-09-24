@@ -1,0 +1,15 @@
+Functions and Default Arguments
+
+A function signature may declare positional parameters, keyword parameters, and a
+catch-all for extra values. Giving a parameter a default makes it optional at the call
+site, which is how most library APIs stay short for the common case while remaining
+configurable for the unusual one.
+
+Defaults are evaluated once, when the function is defined, not on every call. Using an
+empty list or dictionary as a default therefore creates a single shared object that
+accumulates state between calls. The standard workaround is to default the parameter to
+None and build a fresh container inside the body.
+
+Type hints on parameters and return values do not change runtime behaviour, but they let
+editors and static checkers catch mismatched arguments before the program runs, which is
+valuable once a codebase grows past a few hundred lines.

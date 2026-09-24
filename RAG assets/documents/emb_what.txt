@@ -1,0 +1,13 @@
+What an Embedding Is
+
+An embedding maps a piece of text onto a fixed-length list of floating point numbers.
+Texts that a model judges to mean similar things land near one another in that space,
+while unrelated texts land far apart.
+
+The mapping is learned, not designed. Nothing forces dimension 47 to correspond to a
+concept a human could name, and inspecting individual coordinates is rarely informative.
+What carries meaning is the geometric relationship between whole vectors.
+
+Because the output length is fixed, a single word and a full paragraph both become
+vectors of the same size. This is what allows a short query and a long passage to be
+compared directly with one arithmetic operation.

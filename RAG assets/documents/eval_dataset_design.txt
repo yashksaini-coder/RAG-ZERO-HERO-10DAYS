@@ -1,0 +1,12 @@
+Building an Evaluation Set
+
+A usable evaluation set pairs each question with the identifiers of the sources that
+genuinely answer it. Without those labels no retrieval metric can be computed and changes
+can only be judged by impression.
+
+Thirty to fifty questions is enough to detect a meaningful regression, provided they span
+the range of real usage: simple lookups, questions needing two sources, questions phrased in
+unexpected vocabulary, and questions the collection cannot answer at all.
+
+That last category is the one most often omitted and the most informative, because it is the
+only way to observe whether the system declines to answer or invents something.

@@ -1,5 +1,13 @@
-Document: chunk_paragraph
+Paragraph-Aware Chunking
 
-Paragraph-aware chunking keeps related prose together but may produce uneven sizes.
+Paragraph-aware chunking treats a blank line as the boundary and keeps each paragraph
+intact, merging consecutive short paragraphs until the target size is approached. Prose
+written by a human already groups one idea per paragraph, so the pieces inherit that
+coherence.
 
-This document is a small synthetic fixture for RAG retrieval experiments.
+The weakness is variance. A document mixing one-line notes with dense multi-sentence
+paragraphs yields pieces whose lengths differ by an order of magnitude, and an unusually
+long paragraph may exceed the target on its own and need a secondary split.
+
+Markdown and HTML expose paragraph boundaries explicitly, so this strategy is easiest to
+apply to structured sources and hardest on plain text that uses inconsistent spacing.

@@ -1,0 +1,16 @@
+Python Language Basics
+
+Python uses indentation rather than braces to mark the body of a function, loop, or
+conditional. A consistent four-space indent is the community convention, and mixing tabs
+with spaces inside the same block raises a TabError. Because whitespace is syntax, the
+visual shape of a Python file matches its structure.
+
+The language ships with a large standard library covering JSON parsing, file paths,
+compression, HTTP clients, date arithmetic, and unit testing. Reaching for a module in
+that library before installing a third-party package keeps a project's dependency list
+short and its install reproducible.
+
+Names are bound to objects rather than to fixed memory slots, so assigning one variable
+to another makes both refer to the same object. This matters when a mutable value such
+as a list is passed into a function, because changes made inside the function remain
+visible to the caller.

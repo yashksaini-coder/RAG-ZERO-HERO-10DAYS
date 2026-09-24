@@ -1,0 +1,13 @@
+Normalising Vectors Before Comparison
+
+Dividing a vector by its own magnitude produces a unit vector, one whose length is
+exactly one. After this step the dot product of two vectors equals their cosine
+similarity, because the denominator of the cosine formula has become one.
+
+Storing unit vectors therefore turns every later comparison into a single dot product,
+which is measurably faster across a large collection and is why several vector stores
+normalise on insertion by default.
+
+The operation fails on a zero vector, since dividing by a magnitude of zero is undefined.
+Empty or whitespace-only input is the usual cause, so filtering blank strings before the
+embedding call avoids a class of confusing runtime errors.

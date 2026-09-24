@@ -1,0 +1,15 @@
+Error Handling Strategies
+
+A try block should wrap the smallest region of code that can actually fail, and the
+except clause should name the specific exception expected. Catching bare Exception hides
+programming mistakes such as typos in attribute names behind what looks like a handled
+error.
+
+The else clause runs only when no exception was raised, which separates the risky
+operation from the code that depends on its success. The finally clause runs either way
+and is the right place for cleanup that must happen regardless of outcome.
+
+Raising a custom exception class lets callers distinguish a recoverable condition from a
+fatal one. When re-raising after logging, using a bare raise preserves the original
+traceback, whereas raising a new object discards the line number where the problem
+started.

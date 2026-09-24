@@ -1,5 +1,0 @@
-Document: bm25
-
-BM25 is a lexical ranking method that scores documents according to term relevance.
-
-This document is a small synthetic fixture for RAG retrieval experiments.

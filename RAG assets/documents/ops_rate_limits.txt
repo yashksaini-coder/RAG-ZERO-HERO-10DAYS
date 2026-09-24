@@ -1,0 +1,13 @@
+Rate Limits and Retries
+
+Providers cap both requests and tokens per minute, and exceeding either returns a status
+that means the call should be retried rather than abandoned. Treating it as a hard failure
+turns a brief burst into a visible outage.
+
+Exponential backoff with jitter is the standard response: wait a little, then longer,
+adding randomness so that many clients recovering at once do not resynchronise into another
+burst. A cap on total attempts keeps a failing call from retrying indefinitely.
+
+Errors caused by malformed input should not be retried at all, since the same request will
+fail identically. Distinguishing retryable from permanent failures is what stops a retry
+loop from amplifying a bug.

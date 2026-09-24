@@ -1,0 +1,13 @@
+Cross-Encoder Reranking
+
+A reranker reads the query and a candidate passage together and outputs a single relevance
+score. Because the two texts interact inside the model, it can judge fit far more precisely
+than a comparison of two independently computed vectors.
+
+The cost is that nothing can be precomputed: a score exists only once a specific pair is
+evaluated, so the work is proportional to the number of candidates. Running it over a whole
+collection is impractical.
+
+The standard arrangement fetches a few dozen candidates cheaply, reranks only those, and
+keeps the best handful. Recall is set by the first stage, so a passage the retriever missed
+can never be recovered by the reranker no matter how good it is.

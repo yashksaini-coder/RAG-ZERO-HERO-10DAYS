@@ -1,0 +1,13 @@
+Reciprocal Rank Fusion
+
+Reciprocal rank fusion merges several ranked lists using position alone. Each list
+contributes one divided by a constant plus the item's rank, and the contributions are
+summed per item across every list.
+
+Because only positions are used, no score normalisation is needed, which is what makes the
+method robust when the rankers produce incomparable numbers. The constant, conventionally
+sixty, damps the influence of the very top position so one list cannot dominate outright.
+
+An item ranked moderately well by several rankers can therefore finish above an item ranked
+first by one and ignored by the rest. That consensus behaviour is usually what is wanted
+when the individual rankers are known to be individually unreliable.

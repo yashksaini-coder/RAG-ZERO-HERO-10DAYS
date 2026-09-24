@@ -1,0 +1,13 @@
+The Indexing and Query Pipelines
+
+A RAG system has two pipelines that run at different times. Indexing happens ahead of a
+question: documents are loaded, cleaned, split into passages, encoded, and written to a
+store together with their metadata.
+
+Querying happens per question: the question is encoded, the store returns the closest
+passages, those passages are assembled into a prompt, and the model produces an answer that
+is returned with its sources.
+
+Keeping the two separate matters because they have different performance requirements.
+Indexing is a batch job that may take minutes, while querying sits in front of a user and
+is measured in hundreds of milliseconds.

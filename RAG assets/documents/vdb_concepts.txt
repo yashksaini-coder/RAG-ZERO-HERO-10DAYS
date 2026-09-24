@@ -1,0 +1,14 @@
+What a Vector Database Does
+
+A vector database stores numeric representations next to the text and metadata they were
+derived from, and answers the question "which stored items sit closest to this one" without
+comparing against every row.
+
+Exhaustive comparison is exact but its cost rises in direct proportion to collection size,
+which becomes the dominant latency term somewhere in the tens of thousands of items.
+Approximate indexes trade a small amount of recall for a search time that grows far more
+slowly.
+
+Alongside the vectors the store keeps an identifier, the original text, and arbitrary
+metadata fields. Returning the text with the match is what lets an application show a
+result rather than a row of numbers.

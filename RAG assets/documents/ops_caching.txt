@@ -1,0 +1,13 @@
+Caching Layers
+
+Three caches are worth considering. Embeddings for unchanged text never need recomputing;
+keying on a hash of the text makes re-indexing nearly free for documents that did not
+change.
+
+Retrieval results can be cached per normalised question, which helps when many users ask
+the same thing. The entry must be invalidated when the collection changes, or answers will
+be served from a stale index.
+
+Caching completions saves the most money and is the most hazardous, because two questions
+that normalise to the same key may deserve different answers once conversation history is
+taken into account.

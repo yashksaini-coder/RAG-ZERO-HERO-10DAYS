@@ -1,0 +1,13 @@
+Choosing How Many Results to Return
+
+The number of passages passed to the generator trades coverage against dilution. Too few
+and the answer may be missing; too many and the relevant passage competes for attention
+with weak ones while consuming the context budget.
+
+Between three and five passages is a common operating point for question answering over
+prose. Tasks requiring synthesis across sources need more, while lookups of a single fact
+need fewer.
+
+Retrieving a larger set and then filtering by score or reranking is usually better than
+retrieving few directly, because it lets the cut be made on measured relevance rather than
+on a fixed count chosen in advance.

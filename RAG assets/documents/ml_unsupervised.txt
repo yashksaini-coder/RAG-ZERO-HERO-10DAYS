@@ -1,5 +1,13 @@
-Document: ml_unsupervised
+Unsupervised Learning
 
-Unsupervised learning finds structure in data without explicit target labels.
+Unsupervised learning looks for structure in data that carries no target column. Instead
+of matching a recorded answer it optimises an objective defined purely over the inputs,
+such as keeping similar items near one another.
 
-This document is a small synthetic fixture for RAG retrieval experiments.
+Clustering partitions items into groups whose members resemble each other more than they
+resemble members of other groups. Dimensionality reduction instead compresses each item
+into fewer numbers while preserving as much of the original variation as possible.
+
+Because no ground truth exists, evaluation relies on internal measures such as cluster
+compactness, or on a downstream task that consumes the result. A clustering that looks
+tidy on a plot may still be useless for the decision it was meant to support.

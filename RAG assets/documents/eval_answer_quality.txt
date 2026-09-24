@@ -1,0 +1,13 @@
+Measuring Answer Quality
+
+Retrieval metrics say nothing about what the model did with the passages it received.
+Answer quality is assessed separately along three axes: whether the response is supported by
+the passages, whether it addresses the question asked, and whether it is correct.
+
+Exact string comparison against a reference answer is too brittle for free-form text, since
+a correct response phrased differently scores zero. Checking for required key facts is more
+robust and still fully automatic.
+
+Using a language model as the judge scales further but introduces its own biases, including
+a preference for longer and more confident-sounding answers. A sample audited by hand keeps
+the judge honest.
