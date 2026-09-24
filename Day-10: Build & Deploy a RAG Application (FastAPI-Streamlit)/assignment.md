@@ -38,7 +38,15 @@ Create a complete FastAPI backend `rag_api.py`:
 - Add error handling
 - Include API documentation
 
-**Test with:** Postman or curl
+**Test with:** Postman or curl, against the same corpus you have used all week.
+Index `../RAG assets/documents/` (61 files) plus
+`../RAG assets/sample_rag_manual.pdf` for the upload endpoint, and drive
+`POST /query` from `../RAG assets/test_queries.txt`.
+
+Include the four `unanswerable` questions from
+`../RAG assets/evaluation_questions.json` in your manual testing — an endpoint that
+returns a confident answer with no sources for those is the failure mode most worth
+catching before deploying.
 
 **Deliverable:** `task1_fastapi_backend.py`
 
@@ -242,12 +250,12 @@ curl http://localhost:8000/health
 
 # Index document
 curl -X POST http://localhost:8000/index \
-  -F "file=@document.pdf"
+  -F "file=@../RAG assets/sample_rag_manual.pdf"
 
 # Query
 curl -X POST http://localhost:8000/query \
   -H "Content-Type: application/json" \
-  -d '{"question": "What is Python?", "k": 3}'
+  -d '{"question": "What is retrieval-augmented generation?", "k": 3}'
 ```
 
 ### Task 2 Expected Output:

@@ -34,7 +34,7 @@ Create a tool `embedding_generator.py` that:
 - Display first few values
 - Calculate and display statistics (min, max, mean)
 
-**Test with:** Various texts (short, long, different topics)
+**Test with:** `../RAG assets/documents/` — 61 documents spanning 13 topics, 94-146 words each. For the short/long contrast, compare a single document against `../RAG assets/long_rag_corpus.txt`.
 
 **Deliverable:** `task1_embedding_generator.py`
 
@@ -56,10 +56,24 @@ Build a similarity calculator `similarity_calculator.py`:
 - Compare multiple text pairs
 - Show embedding values (first few dimensions)
 
-**Test with:**
+**Test with:** the word pairs first, then real documents where you know the
+expected ordering:
+
 - Very similar texts ("dog" vs "puppy")
 - Somewhat similar ("dog" vs "animal")
 - Different texts ("dog" vs "computer")
+
+Then, from `../RAG assets/documents/`:
+
+| Pair | Expect |
+| --- | --- |
+| `chunk_fixed.txt` vs `chunk_sentence.txt` | high — same subject, different strategy |
+| `ret_bm25.txt` vs `ret_semantic.txt` | moderate — both retrieval, opposed approaches |
+| `rag_intro.txt` vs `offtopic_sourdough.txt` | low — unrelated domains |
+
+The off-topic documents exist precisely so you have a known-far pair. If your
+"unrelated" score is not clearly below your "related" score, check your
+normalisation before blaming the model.
 
 **Deliverable:** `task2_similarity_calculator.py`
 
@@ -81,7 +95,7 @@ Create a document storage system `chromadb_store.py`:
 - Support metadata filtering
 - Handle collection creation/loading
 
-**Test with:** 20+ sample documents on various topics
+**Test with:** `../RAG assets/documents/` (61 documents). Load the per-document fields from `../RAG assets/documents_metadata.json` — `topic`, `doc_type`, `difficulty`, `word_count` are all flat scalars, which is what Chroma requires for the metadata filtering in the requirements.
 
 **Deliverable:** `task3_chromadb_store.py`
 
@@ -103,7 +117,7 @@ Build a batch processor `batch_processor.py`:
 - Error recovery (skip failed items, continue)
 - Summary report
 
-**Test with:** 50+ documents
+**Test with:** `../RAG assets/documents/` — 61 documents, which clears the 50 this task asks for. To exercise the error recovery, add `../RAG assets/empty.txt` to the batch: an empty string is the usual cause of a failed embedding call, and your processor should skip it and continue.
 
 **Deliverable:** `task4_batch_processor.py`
 
@@ -126,7 +140,7 @@ Create a semantic search engine `semantic_search.py`:
 - Highlight matching content (optional)
 - Export search results
 
-**Test with:** A collection of 30+ documents
+**Test with:** `../RAG assets/documents/` (61 documents) with the queries in `../RAG assets/test_queries.txt`. `../RAG assets/evaluation_questions.json` gives the documents each query should return, so you can check your top-K rather than eyeballing it.
 
 **Deliverable:** `task5_semantic_search.py`
 
@@ -195,23 +209,23 @@ python semantic_search_tool.py
 === Semantic Search Tool ===
 Choose option: 1
 
-Enter directory path: ./documents
+Enter directory path: ../RAG assets/documents
 Chunk size [500]: 400
 Processing documents...
-✓ Indexed 15 documents
-✓ Created 42 chunks
+✓ Indexed 61 documents
+✓ Created 161 chunks
 ✓ Generated embeddings
 
 Choose option: 2
 
-Enter search query: What is machine learning?
+Enter search query: What is the difference between lexical and semantic search?
 Found 5 results:
 
-1. [Score: 0.89] Machine learning is a subset of AI...
-   Source: ai_textbook.pdf, Page: 3
+1. [Score: 0.89] BM25 scores a document against a query by summing...
+   Source: documents/ret_bm25.txt, Topic: retrieval
 
-2. [Score: 0.85] ML algorithms learn from data...
-   Source: ml_guide.pdf, Page: 1
+2. [Score: 0.85] Semantic retrieval encodes the query with the same model...
+   Source: documents/ret_semantic.txt, Topic: retrieval
 ...
 ```
 
@@ -259,13 +273,20 @@ Interpretation: Different (unrelated concepts)
 
 ### Task 3 Expected Output:
 ```python
+import json
+from pathlib import Path
+
+meta = json.loads(Path("../RAG assets/documents_metadata.json").read_text())
+
 store = DocumentStore("my_collection")
 store.add_documents(
-    texts=["Doc 1", "Doc 2"],
-    metadatas=[{"source": "book1"}, {"source": "book2"}]
+    ids=[m["id"] for m in meta],
+    texts=[m["text"] for m in meta],
+    metadatas=[{"source": m["source"], "topic": m["topic"],
+                "difficulty": m["difficulty"]} for m in meta],
 )
 
-results = store.search("programming", n_results=2)
+results = store.search("How do I split documents before embedding them?", n_results=2)
 # Returns top 2 similar documents with metadata
 ```
 
@@ -283,16 +304,16 @@ The semantic search tool should provide:
 === Semantic Search Tool ===
 Choose: 2
 
-Query: How does neural network work?
+Query: How should I split documents before embedding them?
 Searching...
 
 Results (Top 5):
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-1. [0.92] Neural networks are computing systems...
-   📄 Source: ai_book.pdf | 📄 Page: 45
+1. [0.92] Fixed-size chunking walks the text and cuts at a set number...
+   📄 Source: documents/chunk_fixed.txt | 📄 Topic: chunking
 
-2. [0.88] A neural network consists of layers...
-   📄 Source: ml_guide.pdf | 📄 Page: 12
+2. [0.88] Sentence-aware chunking first segments the text into sentences...
+   📄 Source: documents/chunk_sentence.txt | 📄 Topic: chunking
 ...
 ```
 
