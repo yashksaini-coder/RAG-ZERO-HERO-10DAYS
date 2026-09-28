@@ -25,6 +25,19 @@ def preprocess_text(text: str):
     return clean_text
 
 
+def remove_stop_words(text: str):
+    stop_words = ["the", "a", "an", "is"]
+    words = text.split()
+    filtered_text = []
+
+    for word in words:
+        if word not in stop_words:
+            filtered_text.append(word)
+    filtered_text = " ".join(filtered_text)
+
+    return filtered_text
+
+
 with open("../RAG assets/test_queries.txt", "r", encoding="utf-8") as file:
     text = file.read()
 
@@ -33,3 +46,7 @@ print("-" * 80, "\n", "original text is: ", text)
 res = preprocess_text(text)
 
 print("-" * 80, "\n", "Preprocessed text is: ", res)
+
+filtered_result = remove_stop_words(res)
+
+print("-" * 80, "\n", "Filtered text is: ", filtered_result)
