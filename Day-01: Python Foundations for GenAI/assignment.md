@@ -2,8 +2,7 @@
 
 ## Instructions
 
-Complete the following tasks to reinforce your Python foundations. Write all code in separate Python files (`.py`).
-Test your code thoroughly and make sure it runs without errors.
+Complete the following tasks to reinforce your Python foundations. Write all code in separate Python files (`.py`). Test your code thoroughly and make sure it runs without errors.
 
 **Important:**
 
